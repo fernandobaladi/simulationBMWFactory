@@ -11,34 +11,29 @@ import java.util.concurrent.Semaphore;
  *
  * @author Fernando Baladi
  */
-public class Ensambladores extends Thread {
+public class ProductorRuedas extends Thread{
     String nombre;
     Semaphore semR;
     Semaphore semER;
-    Semaphore semM;
-    Semaphore semEM;
-
     
-    public Ensambladores(Semaphore sem, String nombre, Semaphore sem2, Semaphore sem3, Semaphore sem4) {
+    public ProductorRuedas(Semaphore sem, String nombre, Semaphore sem2) {
         this.semR = sem;
         this.nombre = nombre;
         this.semER = sem2;
-        this.semM = sem3;
-        this.semEM = sem4;
     }
 
     public void run(){
         while(true){
             try{
-                this.semER.acquire(4);
-                this.semEM.acquire();
-                System.out.println("produje un carro " + nombre);
-                this.semR.release(4);
-                this.semM.release();
-                Thread.sleep(2000);
+                this.semR.acquire();
+                System.out.println("produje una rueda " + nombre);
+                this.semER.release();
+                Thread.sleep(1000);
             }catch(InterruptedException ex){
                 System.out.println("Mamaste");
             }
         }
     }
+    
+    
 }
