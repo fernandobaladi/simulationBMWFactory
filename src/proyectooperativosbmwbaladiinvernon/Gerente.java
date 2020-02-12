@@ -16,31 +16,30 @@ public class Gerente extends Thread{
 
     Semaphore JG;
     int dia;
-    int contador;
-    
-    public Gerente(Semaphore JG, int dia, int contador) {
+    ContadorDias contador;
+    boolean despacha = false;
+    Almacen carros;
+    public Gerente(Semaphore JG, int dia, ContadorDias contador, Almacen carros) {
         this.JG = JG;
         this.dia = dia;
         this.contador = contador;
+        this.carros = carros;
     }
     
+    @Override
     public void run(){
         while(true){
             try{
-                
-                if(this.JG.availablePermits() == 1){
-                    this.JG.acquire();
-                    if (contador!=0) {
-                        System.out.println("conta" + contador);
-                        System.out.println(tiempoDurmiendo());
-                        System.out.println("Ya chequeé");
-                        this.JG.release();
-                        Thread.sleep(tiempoDurmiendo());
-                    }else{
-                        System.out.println("Nos quedamos sin conta");
-                    }
-                    
-                    
+                this.JG.acquire();
+                if (contador.getContadorDias()!=0) {
+                    this.JG.release();
+                    Thread.sleep(tiempoDurmiendo());
+                }else{
+                    despacha = true;
+                    this.carros.setCarros(0);
+                    System.out.println("Nos quedamos sin conta");
+                    Thread.sleep(tiempoDurmiendo());
+                    despacha = false;
                 }
             }catch(InterruptedException ex){
                 System.out.println("Mamaste");
@@ -51,9 +50,8 @@ public class Gerente extends Thread{
     
     public int tiempoDurmiendo(){
         int n = (int)(Math.random() * 13 + 6);
-        double f =(n/24);
-        System.out.println(f);
-        int t = this.dia * (int)f;
+        double f =((double)n/24);
+        int t =  (int)(this.dia * f);
         return t;
     }
 }
