@@ -17,14 +17,17 @@ public class Ensambladores extends Thread {
     Semaphore semER;
     Semaphore semM;
     Semaphore semEM;
-
-    
-    public Ensambladores(Semaphore sem, String nombre, Semaphore sem2, Semaphore sem3, Semaphore sem4) {
+    Semaphore semEP;
+    Semaphore semP;
+    int carrosProducidos = 0;
+    public Ensambladores(Semaphore sem, String nombre, Semaphore sem2, Semaphore sem3, Semaphore sem4, Semaphore sem5, Semaphore sem6) {
         this.semR = sem;
         this.nombre = nombre;
         this.semER = sem2;
         this.semM = sem3;
         this.semEM = sem4;
+        this.semP = sem5;
+        this.semEP = sem6;
     }
 
     public void run(){
@@ -32,9 +35,13 @@ public class Ensambladores extends Thread {
             try{
                 this.semER.acquire(4);
                 this.semEM.acquire();
+                this.semEP.acquire();
                 System.out.println("produje un carro " + nombre);
+                this.carrosProducidos++;
+                System.out.println("Llevamos " + carrosProducidos + " producidos");
                 this.semR.release(4);
                 this.semM.release();
+                this.semP.release();
                 Thread.sleep(2000);
             }catch(InterruptedException ex){
                 System.out.println("Mamaste");
