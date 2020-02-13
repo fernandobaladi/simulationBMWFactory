@@ -9,6 +9,7 @@ import static java.lang.Thread.sleep;
 import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 
 /**
  *
@@ -20,6 +21,12 @@ public class ProyectoOperativosBMWBaladiInvernon {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws InterruptedException {
+        
+        Vista v = new Vista();
+        v.setVisible(true);
+        v.setResizable(false);
+        v.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        v.setLocationRelativeTo(null);
         
         Semaphore semR = new Semaphore(30);
         Semaphore semER = new Semaphore(-3);
