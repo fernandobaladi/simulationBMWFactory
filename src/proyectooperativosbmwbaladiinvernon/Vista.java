@@ -16,7 +16,8 @@ import javax.swing.JOptionPane;
  */
 public class Vista extends javax.swing.JFrame {
 
-    
+    //Mira aquí
+    ContadorDias diasParaDespacho;
     /**
      * Creates new form Vista
      */
@@ -38,6 +39,8 @@ public class Vista extends javax.swing.JFrame {
         BossjTextField.setEditable(false);
         ManagerjTextField.setEditable(false);
         RemainingDaysjTextField.setEditable(false);
+        //Aquí lo "Instancié"
+        this.diasParaDespacho =  new ContadorDias();
         
         DayNumberjTextField.addKeyListener(new KeyAdapter() {
            public void keyTyped(KeyEvent event)
@@ -630,7 +633,7 @@ public class Vista extends javax.swing.JFrame {
         
             MainjPanel.setVisible(false);
             AppjPanel.setVisible(true);
-//            = DayNumberjTextField.getText();
+            this.diasParaDespacho.setContadorDias(Integer.parseInt(DayNumberjTextField.getText()));
         }
         
     }//GEN-LAST:event_AcceptDayNumberjButtonActionPerformed

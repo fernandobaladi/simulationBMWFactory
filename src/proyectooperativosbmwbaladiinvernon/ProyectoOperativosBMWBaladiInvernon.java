@@ -84,18 +84,23 @@ public class ProyectoOperativosBMWBaladiInvernon {
         ger.start();
         jef.start();
     }
-    
+    /*NOT PARKING BALLS A LO QUE ESCRIBÍ AQUÍ
     public static void contrataProdRueda(Semaphore semR, Semaphore semER, Productor[] prod){
         Productor rueda1 = new Productor(semR, "r"," una rueda", semER,1, 1000);
-        prod[0]= rueda1;
+        for (int i = 0; i < prod.length; i++) {
+            if (prod[i]!=null) {
+                
+            }else{
+                
+            }
+        }
+    }
+    public static void contrataProdMotor(Semaphore semM, Semaphore semEM){
+        Productor rueda1 = new Productor(semM, "m"," un motor", semEM,1, 1000);
         rueda1.start();
     }
-    public static void contrataProdMotor(Semaphore semR, Semaphore semER){
-        Productor rueda1 = new Productor(semR, "r"," una rueda", semER,1, 1000);
-        rueda1.start();
-    }
-    public static void contrataProdParabrisa(Semaphore semR, Semaphore semER){
-        Productor rueda1 = new Productor(semR, "r"," una rueda", semER,1, 1000);
+    public static void contrataProdParabrisa(Semaphore semP, Semaphore semEP){
+        Productor rueda1 = new Productor(semP, "p"," un parabrisas", semEP,1, 1000);
         rueda1.start();
     }
     
@@ -120,6 +125,6 @@ public class ProyectoOperativosBMWBaladiInvernon {
                 }
             }
         }
-    }
+    }*/
     
 }
