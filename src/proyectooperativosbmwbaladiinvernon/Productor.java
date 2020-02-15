@@ -12,24 +12,36 @@ import java.util.concurrent.Semaphore;
  * @author Fernando Baladi
  */
 public class Productor extends Thread{
+    
     String nombre, objeto;
-    Semaphore sem,  semE;
+    Semaphore sem,  semE, semEX;
     int dias, diasDeProduccion, tiempoProducción;
     boolean contratado = true;
-    public Productor(Semaphore sem, String nombre, String objeto, Semaphore sem2, int dias, int diasDeProduccion) {
+    boolean[] almacen;
+    int numeroDePiezas;
+    
+    public Productor(Semaphore sem, String nombre, String objeto, Semaphore sem2,
+            int dias, int diasDeProduccion, Semaphore semEX, boolean[] almacen, 
+            int numeroDePiezas) {
         this.sem = sem;
         this.nombre = nombre;
         this.semE = sem2;
         this.objeto = objeto;
         this.tiempoProducción = dias * diasDeProduccion;
+        this.semEX = semEX;
+        this.almacen = almacen;
+        this.numeroDePiezas = numeroDePiezas;
     }
 
     public void run(){
         while(contratado){
             try{
-                Thread.sleep(tiempoProducción);
                 this.sem.acquire();
-                System.out.println("Produje "+ objeto+ " " + nombre+".");
+                Thread.sleep(tiempoProducción);
+                this.semEX.acquire();
+                this.almacen[(this.numeroDePiezas%this.almacen.length)] = true;
+                this.numeroDePiezas++;
+                this.semEX.release();
                 this.semE.release();
             }catch(InterruptedException ex){
                 System.out.println("Mamaste");

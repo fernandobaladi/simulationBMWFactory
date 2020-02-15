@@ -14,10 +14,10 @@ import java.util.concurrent.Semaphore;
 public class Jefe extends Thread {
     
     int dia, tiempoDeCambio, diasParaDespacho;
-    ContadorDias contador;
+    int contador;
     Semaphore JG;
     
-    public Jefe(Semaphore JG, int dia, ContadorDias contador, int diasParaDespacho){
+    public Jefe(Semaphore JG, int dia, int contador, int diasParaDespacho){
         this.dia = dia;
         this.JG = JG;
         this.contador = contador;
@@ -31,11 +31,11 @@ public class Jefe extends Thread {
                 while(this.JG.availablePermits()!=0){
                     this.JG.acquire();
                         Thread.sleep(tiempoDeCambio);
-                        if(this.contador.getContadorDias()!=0){
-                            this.contador.setContadorDias(this.contador.getContadorDias()-1);
-                            System.out.println("Faltan " + this.contador.getContadorDias() + " días para despachar.");
+                        if(this.contador != 0){
+                            this.contador--;
+                            System.out.println("Faltan " + this.contador + " días para despachar.");
                         }else{
-                           this.contador.setContadorDias(this.diasParaDespacho);
+                           this.contador = this.diasParaDespacho;
                         }
                 }
                 this.JG.release();

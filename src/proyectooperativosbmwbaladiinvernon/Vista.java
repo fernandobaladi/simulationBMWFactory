@@ -8,6 +8,7 @@ package proyectooperativosbmwbaladiinvernon;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.concurrent.Semaphore;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,7 +18,34 @@ import javax.swing.JOptionPane;
 public class Vista extends javax.swing.JFrame {
 
     //Mira aquí
-    ContadorDias diasParaDespacho;
+    public static volatile boolean[] almacenRuedas;
+    public static volatile boolean[] almacenMotores;
+    public static volatile boolean[] almacenParabrisas;
+    public static int disponibilidadMaximaRuedas;
+    public static int disponibilidadMaximaParabrisas;
+    public static int disponibilidadMaximaMotores;
+    public static volatile int contadorRuedasProducidas;
+    public static volatile int contadorMotoresProducidos;
+    public static volatile int contadorParabrisasProducidos;
+    public static volatile int contadorRuedasConsumidas;
+    public static volatile int contadorMotoresConsumidos;
+    public static volatile int contadorParabrisasConsumidos;
+    public static volatile int contadorCarrosProducidos;
+    public static volatile int diasParaDespacho;
+    public static int diasParaDespachoEstatico;
+    public static int duracionDelDia;
+    public static int diasDeEnsamblaje;
+    public static int diasDeProduccionMotor;
+    public static int diasDeProduccionRueda;
+    public static int diasDeProduccionParabrisas;
+    public static int productoresRuedasIniciales;
+    public static int productoresMotoresIniciales;
+    public static int productoresParabrisasIniciales;
+    public static int ensambladoresIniciales;
+    public static int ensambladoresActuales;
+    public static int productoresRuedasActuales;
+    public static int productoresMotoresActuales;
+    public static int productoresParabirsasActuales;
     /**
      * Creates new form Vista
      */
@@ -39,9 +67,8 @@ public class Vista extends javax.swing.JFrame {
         BossjTextField.setEditable(false);
         ManagerjTextField.setEditable(false);
         RemainingDaysjTextField.setEditable(false);
-        //Aquí lo "Instancié"
-        this.diasParaDespacho =  new ContadorDias();
-        
+        WheelMakerjTextField.setText(String.valueOf(productoresRuedasActuales));
+
         DayNumberjTextField.addKeyListener(new KeyAdapter() {
            public void keyTyped(KeyEvent event)
            {
@@ -633,13 +660,12 @@ public class Vista extends javax.swing.JFrame {
         
             MainjPanel.setVisible(false);
             AppjPanel.setVisible(true);
-            this.diasParaDespacho.setContadorDias(Integer.parseInt(DayNumberjTextField.getText()));
         }
         
     }//GEN-LAST:event_AcceptDayNumberjButtonActionPerformed
 
     private void WheelMakerjTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WheelMakerjTextFieldActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_WheelMakerjTextFieldActionPerformed
 
     private void YesDefaultDaysjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YesDefaultDaysjButtonActionPerformed
@@ -694,36 +720,86 @@ public class Vista extends javax.swing.JFrame {
             }
         });
         
+        //cantidad de productores iniciales
+        productoresMotoresIniciales = 2;
+        productoresRuedasIniciales = 3;
+        productoresParabrisasIniciales = 2;
+        ensambladoresIniciales = 2;
+        
+        productoresMotoresActuales = productoresMotoresIniciales;
+        productoresParabirsasActuales = productoresParabrisasIniciales;
+        productoresRuedasActuales = productoresRuedasIniciales;
+        ensambladoresActuales = ensambladoresIniciales;
+        
+        //Días de producción por productor
+        diasDeProduccionMotor = 3;
+        diasDeProduccionParabrisas = 2;
+        diasDeProduccionRueda = 1;
+        diasDeEnsamblaje = 2;
+        
+        //tiempo del día
+        duracionDelDia = 1000;
+        diasParaDespachoEstatico = 10;
+        diasParaDespacho = diasParaDespachoEstatico;
+        
+        //Disponibilidad en el almacen
+        disponibilidadMaximaRuedas = 30;
+        disponibilidadMaximaMotores = 15;
+        disponibilidadMaximaParabrisas = 25;
+        
+        almacenRuedas = new boolean[disponibilidadMaximaRuedas];
+        almacenParabrisas = new boolean[disponibilidadMaximaParabrisas];
+        almacenMotores = new boolean[disponibilidadMaximaMotores];
+        
+        //Semáforos de exclusión mutua
+        Semaphore semRG = new Semaphore(1);
+        Semaphore semMG = new Semaphore(1);
+        Semaphore semPG = new Semaphore(1);
+        
+        //semáforos de control
         Semaphore semR = new Semaphore(30);
         Semaphore semER = new Semaphore(-3);
         Semaphore semM = new Semaphore(25);
         Semaphore semP = new Semaphore(15);
         Semaphore semEM = new Semaphore(0);
         Semaphore semEP = new Semaphore(0);
+        
+        //Semáforos gerenciales
+        Semaphore semGE = new Semaphore(1);
         Semaphore semJG = new Semaphore(1);
+        
         Productor[] prodRuedas = new Productor[5];
         Productor[] prodParabrisas = new Productor[3];
         Productor[] prodMotores = new Productor[3];
         Ensambladores[] ensambladoresA = new Ensambladores[3];
-        int contador = 10;
-        Almacen carrosProducidos = new Almacen();
-        ContadorDias diasParaDespacho = new ContadorDias();
-        diasParaDespacho.setContadorDias(10);
-        prodRuedas[0] = new Productor(semR, "r"," una rueda", semER,1, 1000);
-        prodRuedas[1] = new Productor(semR, "r2", " una rueda", semER,1, 1000);
-        prodRuedas[2] = new Productor(semR, "r3", " una rueda", semER,1, 1000);
-        prodRuedas[3] = new Productor(semR, "r4", " una rueda", semER,1, 1000);
-        prodMotores[0] = new Productor(semM, "m", " un motor", semEM, 3, 1000);
-        prodMotores[1] = new Productor(semM, "m2", " un motor", semEM, 3, 1000);
-        prodMotores[2] = new Productor(semM, "m3", " un motor", semEM, 3, 1000);
-        prodParabrisas[0] = new Productor(semP, "p", " un parabrisas", semEP, 2, 1000);
-        prodParabrisas[1] = new Productor(semP, "p2", " un parabrisas", semEP, 2, 1000);
-        prodParabrisas[2] = new Productor(semP, "p3", " un parabrisas", semEP, 2, 1000);
-        ensambladoresA[0] = new Ensambladores(semR, "epa", semER, semM, semEM, semP, semEP, carrosProducidos);
-        ensambladoresA[1] = new Ensambladores(semR, "epa2", semER, semM, semEM, semP, semEP, carrosProducidos);
-        ensambladoresA[2] = new Ensambladores(semR, "epa3", semER, semM, semEM, semP, semEP, carrosProducidos);
-        Gerente ger = new Gerente(semJG, 1000, diasParaDespacho, carrosProducidos);
-        Jefe jef = new Jefe(semJG, 1000, diasParaDespacho, 10);
+        
+        for (int i = 0; i < productoresRuedasIniciales; i++) {
+            prodRuedas[i] = new Productor(semR, "r"," una rueda", semER, 
+                    diasDeProduccionRueda, duracionDelDia, semRG, almacenRuedas, 
+                    contadorRuedasProducidas);    
+        }
+        
+        for (int i = 0; i < productoresMotoresIniciales; i++) {
+            prodMotores[i] = new Productor(semM, "m", " un motor", semEM, 
+                    diasDeProduccionMotor, duracionDelDia, semMG,  almacenMotores, 
+                    contadorMotoresProducidos);
+        }
+        
+        for (int i = 0; i < productoresParabrisasIniciales; i++) {
+            prodParabrisas[i] = new Productor(semP, "p", " un parabrisas", semEP, 
+                    diasDeProduccionParabrisas, duracionDelDia, semPG,  
+                    almacenParabrisas, contadorParabrisasProducidos);
+        }
+        
+        for (int i = 0; i < ensambladoresIniciales; i++) {
+            ensambladoresA[i] = new Ensambladores(semR, "epa", semER, semM, semEM, 
+                semP, semEP, semRG, semPG, semMG, semGE, contadorCarrosProducidos, 
+                almacenRuedas, almacenParabrisas, almacenMotores, contadorRuedasConsumidas, 
+                contadorParabrisasConsumidos, contadorMotoresConsumidos);    
+        }
+          
+        Gerente ger = new Gerente(semJG, duracionDelDia, diasParaDespacho);
+        Jefe jef = new Jefe(semJG, duracionDelDia, diasParaDespacho, diasParaDespachoEstatico);
         
         
         for (int i = 0; i < prodRuedas.length; i++) {
@@ -749,45 +825,44 @@ public class Vista extends javax.swing.JFrame {
         }
         ger.start();
         jef.start();
+    
+    }
+    public void contratarEnsamblador(int cantidadTrabajadores, Ensambladores[] ensambla, 
+            Semaphore semR, String nombre,Semaphore semER, Semaphore semM,
+            Semaphore semEM, Semaphore semP, Semaphore semEP, Semaphore semRG, 
+            Semaphore semPG, Semaphore semMG, Semaphore semGE, int contadorCarrosProducidos, 
+            boolean[] almacenRuedas, boolean[] almacenParabrisas, boolean[] almacenMotores,
+            int contadorRuedasConsumidas, int contadorParabrisasConsumidos, int contadorMotoresConsumidos){
+            ensambla[cantidadTrabajadores] = new Ensambladores(semR, nombre, semER, 
+                semM, semEM, semP, semEP, semRG, semPG, semMG, semGE, 
+                contadorCarrosProducidos, almacenRuedas, almacenParabrisas, 
+                almacenMotores, contadorRuedasConsumidas, contadorParabrisasConsumidos, 
+                contadorMotoresConsumidos);
+            ensambla[cantidadTrabajadores].start();
+            cantidadTrabajadores++;
     }
     
-    public static void contrataProdRueda(Semaphore semR, Semaphore semER, Productor[] prod){
-        Productor rueda1 = new Productor(semR, "r"," una rueda", semER,1, 1000);
-        prod[0]= rueda1;
-        rueda1.start();
-    }
-    public static void contrataProdMotor(Semaphore semR, Semaphore semER){
-        Productor rueda1 = new Productor(semR, "r"," una rueda", semER,1, 1000);
-        rueda1.start();
-    }
-    public static void contrataProdParabrisa(Semaphore semR, Semaphore semER){
-        Productor rueda1 = new Productor(semR, "r"," una rueda", semER,1, 1000);
-        rueda1.start();
+    public void contratarProductor(int cantidadTrabajadores, Productor[] prod, 
+            Semaphore sem, String nombre, String tipoDeProducto,Semaphore semE, 
+            int diasDeProduccion, int duracionDelDia, Semaphore semG, 
+            boolean[] almacen, int contadorProducidos ){
+            
+                prod[cantidadTrabajadores] = new Productor(sem, nombre, tipoDeProducto, 
+                semE, diasDeProduccion, duracionDelDia, semG, almacen, contadorProducidos);
+                prod[cantidadTrabajadores].start();
+                cantidadTrabajadores++;
     }
     
-    public static void despedir(Productor[] prod){
-        if (prod.length == 1) {
-            
-        }else{
-            for (int i = prod.length-1; i > 0; i--) {
-                if(prod[i]!=null) {
-                    prod[i].setContratado(false);
-                }
-            }
-        }
+    public void despedir(int cantidadTrabajadores, Productor[] prod){
+        prod[cantidadTrabajadores].setContratado(false);
+        cantidadTrabajadores--;
     }
-    public static void despedir(Ensambladores[] ensam){
-        if (ensam.length == 1) {
-            
-        }else{
-            for (int i = ensam.length-1; i > 0; i--) {
-                if(ensam[i]!=null) {
-                    ensam[i].setContratado(false);
-                }
-            }
-        }
+    public void despedir(int cantidadTrabajadores, Ensambladores[] ensambla){
+        ensambla[cantidadTrabajadores].setContratado(false);
+        cantidadTrabajadores--;
     }
-
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AcceptDayNumberjButton;
     private javax.swing.JButton AddCarMakerjButton;

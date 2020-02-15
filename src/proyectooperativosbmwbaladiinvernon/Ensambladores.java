@@ -6,17 +6,20 @@
 package proyectooperativosbmwbaladiinvernon;
 
 import java.util.concurrent.Semaphore;
-
 /**
  *
  * @author Fernando Baladi
  */
 public class Ensambladores extends Thread {
     String nombre;
-    Semaphore semR, semER, semM, semEM, semEP, semP;
-    boolean contratado = true;
-    Almacen carrosProducidos;
-    public Ensambladores(Semaphore sem, String nombre, Semaphore sem2, Semaphore sem3, Semaphore sem4, Semaphore sem5, Semaphore sem6, Almacen carrosProducidos) {
+    Semaphore semR, semER, semM, semEM, semEP, semP, semMG, semPG, semRG, semGE;
+    boolean contratado, produje;
+    boolean[] almacenRuedas, almacenParabrisas, almacenMotores;
+    int contadorCarros, contadorRuedasConsumidas, contadorParabrisasConsumidos, contadorMotoresConsumidos;
+    public Ensambladores(Semaphore sem, String nombre, Semaphore sem2, Semaphore sem3, Semaphore sem4, 
+            Semaphore sem5, Semaphore sem6, Semaphore sem7, Semaphore sem8, Semaphore sem9, Semaphore sem10,
+            int contadorCarros, boolean[] almacenRuedas, boolean[] almacenParabirsas, boolean[] almacenMotores,
+            int contadorRuedasConsumidas, int contadorParabrisasConsumidos, int contadorMotoresConsumidos) {
         this.semR = sem;
         this.nombre = nombre;
         this.semER = sem2;
@@ -24,23 +27,59 @@ public class Ensambladores extends Thread {
         this.semEM = sem4;
         this.semP = sem5;
         this.semEP = sem6;
-        this.carrosProducidos = carrosProducidos;
+        this.semRG = sem7;
+        this.semPG = sem8;
+        this.semMG = sem9;
+        this.semGE = sem10;
+        this.contadorCarros = contadorCarros;
+        this.almacenRuedas = almacenRuedas;
+        this.almacenParabrisas = almacenParabirsas;
+        this.almacenMotores = almacenMotores;
+        this.contadorRuedasConsumidas = contadorRuedasConsumidas;
+        this.contadorParabrisasConsumidos = contadorParabrisasConsumidos;
+        this.contadorMotoresConsumidos = contadorMotoresConsumidos;
+        this.contratado = true;
+        this.produje = false;
     }
 
     public void run(){
         while(contratado){
             try{
-                Thread.sleep(2000);
+                
                 this.semER.acquire(4);
                 this.semEM.acquire();
                 this.semEP.acquire();
-                System.out.println("produje un carro " + nombre);
-                this.carrosProducidos.setCarros(this.carrosProducidos.getCarros()+1);
-                System.out.println(this.carrosProducidos.getCarros());
-//                System.out.println("Llevamos " + carrosProducidos + " producidos por "+ this.nombre);
-                this.semR.release(4);
+                this.semRG.acquire();
+                this.semPG.acquire();
+                this.semMG.acquire();
+                
+                this.produje = true;
+                for (int i = 0; i < 4; i++) {
+                    this.almacenRuedas[this.contadorRuedasConsumidas%this.almacenRuedas.length]= false;
+                    this.contadorRuedasConsumidas++;
+                }
+                this.almacenParabrisas[this.contadorParabrisasConsumidos%this.almacenParabrisas.length] = false;
+                this.contadorParabrisasConsumidos++;
+                this.almacenMotores[this.contadorMotoresConsumidos%this.almacenMotores.length] = false;
+                this.contadorMotoresConsumidos++;
+                
+                this.semMG.release();
+                this.semPG.release();
+                this.semRG.release();
+                this.semP.release();                
                 this.semM.release();
-                this.semP.release();
+                this.semR.release(4);
+                if (this.produje) {
+                    Thread.sleep(2000);
+                    //semaforo GE acquire
+                    while(this.produje){
+                        this.semGE.acquire();
+                        this.contadorCarros++;
+                        this.semGE.release();
+                        this.produje = false;
+                    }
+                }
+                
             }catch(InterruptedException ex){
                 System.out.println("Mamaste");
             }

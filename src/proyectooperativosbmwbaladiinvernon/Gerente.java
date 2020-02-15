@@ -16,14 +16,12 @@ public class Gerente extends Thread{
 
     Semaphore JG;
     int dia;
-    ContadorDias contador;
+    int contador;
     boolean despacha = false;
-    Almacen carros;
-    public Gerente(Semaphore JG, int dia, ContadorDias contador, Almacen carros) {
+    public Gerente(Semaphore JG, int dia, int contador) {
         this.JG = JG;
         this.dia = dia;
         this.contador = contador;
-        this.carros = carros;
     }
     
     @Override
@@ -31,12 +29,11 @@ public class Gerente extends Thread{
         while(true){
             try{
                 this.JG.acquire();
-                if (contador.getContadorDias()!=0) {
+                if (contador != 0) {
                     this.JG.release();
                     Thread.sleep(tiempoDurmiendo());
                 }else{
                     despacha = true;
-                    this.carros.setCarros(0);
                     System.out.println("Nos quedamos sin conta");
                     Thread.sleep(tiempoDurmiendo());
                     despacha = false;
