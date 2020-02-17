@@ -23,12 +23,8 @@ public class ProyectoOperativosBMWBaladiInvernon {
     public static void main(String[] args) throws InterruptedException {
         
        
-         Vista v = new Vista();
-        v.setVisible(true);
-        v.setResizable(false);
-        v.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        v.setLocationRelativeTo(null);
-        
+        Fabrica fabrica = new Fabrica();
+        fabrica.verificador();
     /*NOT PARKING BALLS A LO QUE ESCRIBÍ AQUÍ
     public static void contrataProdRueda(Semaphore semR, Semaphore semER, Productor[] prod){
         Productor rueda1 = new Productor(semR, "r"," una rueda", semER,1, 1000);

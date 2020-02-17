@@ -33,7 +33,7 @@ public class Jefe extends Thread {
                         Thread.sleep(tiempoDeCambio);
                         if(this.contador != 0){
                             this.contador--;
-                            System.out.println("Faltan " + this.contador + " días para despachar.");
+                            //System.out.println("Faltan " + this.contador + " días para despachar.");
                         }else{
                            this.contador = this.diasParaDespacho;
                         }

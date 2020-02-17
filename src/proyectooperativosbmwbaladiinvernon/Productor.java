@@ -18,11 +18,11 @@ public class Productor extends Thread{
     int dias, diasDeProduccion, tiempoProducción;
     boolean contratado = true;
     boolean[] almacen;
-    int numeroDePiezas;
+    int tipoDePieza;
     
     public Productor(Semaphore sem, String nombre, String objeto, Semaphore sem2,
             int dias, int diasDeProduccion, Semaphore semEX, boolean[] almacen, 
-            int numeroDePiezas) {
+            int tipoDePieza) {
         this.sem = sem;
         this.nombre = nombre;
         this.semE = sem2;
@@ -30,17 +30,36 @@ public class Productor extends Thread{
         this.tiempoProducción = dias * diasDeProduccion;
         this.semEX = semEX;
         this.almacen = almacen;
-        this.numeroDePiezas = numeroDePiezas;
+        this.tipoDePieza = tipoDePieza;
     }
 
     public void run(){
         while(contratado){
             try{
+                
                 this.sem.acquire();
                 Thread.sleep(tiempoProducción);
                 this.semEX.acquire();
-                this.almacen[(this.numeroDePiezas%this.almacen.length)] = true;
-                this.numeroDePiezas++;
+                
+                if (this.tipoDePieza==1) {
+                    Fabrica.almacenRuedas[(Fabrica.contadorRuedasProducidas%Fabrica.almacenRuedas.length)] = true;
+                    Fabrica.contadorRuedasProducidas++;
+                    System.out.println(Fabrica.contadorRuedasProducidas + " de " + objeto);
+                    System.out.println(this.sem.availablePermits());
+                }
+
+                if (this.tipoDePieza==2) {
+                    Fabrica.almacenMotores[(Fabrica.contadorMotoresProducidos%Fabrica.almacenMotores.length)] = true;
+                    Fabrica.contadorMotoresProducidos++;
+                    //System.out.println( Fabrica.contadorMotoresProducidos + " de " + objeto);
+                }
+                
+                if (this.tipoDePieza==3) {
+                    Fabrica.almacenParabrisas[(Fabrica.contadorParabrisasProducidos%Fabrica.almacenParabrisas.length)] = true;
+                    Fabrica.contadorParabrisasProducidos++;
+                    //System.out.println( Fabrica.contadorParabrisasProducidos + " de " + objeto);
+                }
+                
                 this.semEX.release();
                 this.semE.release();
             }catch(InterruptedException ex){

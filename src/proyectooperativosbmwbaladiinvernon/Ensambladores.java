@@ -54,14 +54,20 @@ public class Ensambladores extends Thread {
                 this.semMG.acquire();
                 
                 this.produje = true;
+                
                 for (int i = 0; i < 4; i++) {
-                    this.almacenRuedas[this.contadorRuedasConsumidas%this.almacenRuedas.length]= false;
-                    this.contadorRuedasConsumidas++;
+                    Fabrica.almacenRuedas[Fabrica.contadorRuedasConsumidas%Fabrica.almacenRuedas.length]= false;
+                    Fabrica.contadorRuedasConsumidas++;
+                    Fabrica.contadorRuedasProducidas--;
                 }
-                this.almacenParabrisas[this.contadorParabrisasConsumidos%this.almacenParabrisas.length] = false;
-                this.contadorParabrisasConsumidos++;
-                this.almacenMotores[this.contadorMotoresConsumidos%this.almacenMotores.length] = false;
-                this.contadorMotoresConsumidos++;
+                
+                Fabrica.almacenParabrisas[Fabrica.contadorParabrisasConsumidos%this.almacenParabrisas.length] = false;
+                Fabrica.contadorParabrisasConsumidos++;
+                Fabrica.contadorParabrisasProducidos--;
+                
+                Fabrica.almacenMotores[Fabrica.contadorMotoresConsumidos%Fabrica.almacenMotores.length] = false;
+                Fabrica.contadorMotoresConsumidos++;
+                Fabrica.contadorMotoresProducidos--;
                 
                 this.semMG.release();
                 this.semPG.release();
@@ -74,7 +80,7 @@ public class Ensambladores extends Thread {
                     //semaforo GE acquire
                     while(this.produje){
                         this.semGE.acquire();
-                        this.contadorCarros++;
+                        Fabrica.contadorCarrosProducidos++;
                         this.semGE.release();
                         this.produje = false;
                     }

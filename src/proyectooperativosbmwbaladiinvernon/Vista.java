@@ -7,6 +7,9 @@ package proyectooperativosbmwbaladiinvernon;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.concurrent.Semaphore;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -18,38 +21,12 @@ import javax.swing.JOptionPane;
 public class Vista extends javax.swing.JFrame {
 
     //Mira aquí
-    public static volatile boolean[] almacenRuedas;
-    public static volatile boolean[] almacenMotores;
-    public static volatile boolean[] almacenParabrisas;
-    public static int disponibilidadMaximaRuedas;
-    public static int disponibilidadMaximaParabrisas;
-    public static int disponibilidadMaximaMotores;
-    public static volatile int contadorRuedasProducidas;
-    public static volatile int contadorMotoresProducidos;
-    public static volatile int contadorParabrisasProducidos;
-    public static volatile int contadorRuedasConsumidas;
-    public static volatile int contadorMotoresConsumidos;
-    public static volatile int contadorParabrisasConsumidos;
-    public static volatile int contadorCarrosProducidos;
-    public static volatile int diasParaDespacho;
-    public static int diasParaDespachoEstatico;
-    public static int duracionDelDia;
-    public static int diasDeEnsamblaje;
-    public static int diasDeProduccionMotor;
-    public static int diasDeProduccionRueda;
-    public static int diasDeProduccionParabrisas;
-    public static int productoresRuedasIniciales;
-    public static int productoresMotoresIniciales;
-    public static int productoresParabrisasIniciales;
-    public static int ensambladoresIniciales;
-    public static int ensambladoresActuales;
-    public static int productoresRuedasActuales;
-    public static int productoresMotoresActuales;
-    public static int productoresParabirsasActuales;
+    
     /**
      * Creates new form Vista
      */
     public Vista() {
+        
         initComponents();
         MainjPanel.setVisible(true);
         jLabel1.setVisible(false);
@@ -67,8 +44,15 @@ public class Vista extends javax.swing.JFrame {
         BossjTextField.setEditable(false);
         ManagerjTextField.setEditable(false);
         RemainingDaysjTextField.setEditable(false);
-        WheelMakerjTextField.setText(String.valueOf(productoresRuedasActuales));
-
+        /*
+            WheelMakerjTextField.setText(String.valueOf(productoresRuedasActuales));
+            WindshieldMakerjTextField.setText(String.valueOf(productoresParabirsasActuales));
+            EngineMakerjTextField.setText(String.valueOf(productoresMotoresActuales));
+            CarMakerjTextField.setText(String.valueOf(ensambladoresActuales));
+            WheelQuantityjTextField.setText(String.valueOf(contadorRuedasProducidas));
+            WindshieldQuantityjTextField.setText(String.valueOf(contadorParabrisasProducidos));
+            EngineQuantityjTextField.setText(String.valueOf(contadorMotoresProducidos));
+        */
         DayNumberjTextField.addKeyListener(new KeyAdapter() {
            public void keyTyped(KeyEvent event)
            {
@@ -84,7 +68,8 @@ public class Vista extends javax.swing.JFrame {
            }
         });
     }
-
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -135,8 +120,6 @@ public class Vista extends javax.swing.JFrame {
         WheelMakerjTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(650, 700));
-        setPreferredSize(new java.awt.Dimension(650, 700));
         setResizable(false);
 
         MainjPanel.setBackground(new java.awt.Color(160, 246, 210));
@@ -219,7 +202,7 @@ public class Vista extends javax.swing.JFrame {
         MainjPanelLayout.setVerticalGroup(
             MainjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MainjPanelLayout.createSequentialGroup()
-                .addContainerGap(387, Short.MAX_VALUE)
+                .addContainerGap(390, Short.MAX_VALUE)
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(MainjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -267,6 +250,11 @@ public class Vista extends javax.swing.JFrame {
         DeleteWheelMakerjButton.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 14)); // NOI18N
         DeleteWheelMakerjButton.setText("-");
         DeleteWheelMakerjButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(204, 204, 204), null, new java.awt.Color(204, 204, 204)));
+        DeleteWheelMakerjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteWheelMakerjButtonActionPerformed(evt);
+            }
+        });
 
         jLabel4.setBackground(new java.awt.Color(160, 246, 210));
         jLabel4.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 18)); // NOI18N
@@ -577,7 +565,7 @@ public class Vista extends javax.swing.JFrame {
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(RemainingDaysjTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -686,6 +674,9 @@ public class Vista extends javax.swing.JFrame {
         
     }//GEN-LAST:event_NoDefaultDaysjButtonActionPerformed
 
+    private void DeleteWheelMakerjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteWheelMakerjButtonActionPerformed
+    }//GEN-LAST:event_DeleteWheelMakerjButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -716,117 +707,16 @@ public class Vista extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Vista().setVisible(true);
+                //new Vista().setVisible(true);
             }
         });
         
-        //cantidad de productores iniciales
-        productoresMotoresIniciales = 2;
-        productoresRuedasIniciales = 3;
-        productoresParabrisasIniciales = 2;
-        ensambladoresIniciales = 2;
         
-        productoresMotoresActuales = productoresMotoresIniciales;
-        productoresParabirsasActuales = productoresParabrisasIniciales;
-        productoresRuedasActuales = productoresRuedasIniciales;
-        ensambladoresActuales = ensambladoresIniciales;
-        
-        //Días de producción por productor
-        diasDeProduccionMotor = 3;
-        diasDeProduccionParabrisas = 2;
-        diasDeProduccionRueda = 1;
-        diasDeEnsamblaje = 2;
-        
-        //tiempo del día
-        duracionDelDia = 1000;
-        diasParaDespachoEstatico = 10;
-        diasParaDespacho = diasParaDespachoEstatico;
-        
-        //Disponibilidad en el almacen
-        disponibilidadMaximaRuedas = 30;
-        disponibilidadMaximaMotores = 15;
-        disponibilidadMaximaParabrisas = 25;
-        
-        almacenRuedas = new boolean[disponibilidadMaximaRuedas];
-        almacenParabrisas = new boolean[disponibilidadMaximaParabrisas];
-        almacenMotores = new boolean[disponibilidadMaximaMotores];
-        
-        //Semáforos de exclusión mutua
-        Semaphore semRG = new Semaphore(1);
-        Semaphore semMG = new Semaphore(1);
-        Semaphore semPG = new Semaphore(1);
-        
-        //semáforos de control
-        Semaphore semR = new Semaphore(30);
-        Semaphore semER = new Semaphore(-3);
-        Semaphore semM = new Semaphore(25);
-        Semaphore semP = new Semaphore(15);
-        Semaphore semEM = new Semaphore(0);
-        Semaphore semEP = new Semaphore(0);
-        
-        //Semáforos gerenciales
-        Semaphore semGE = new Semaphore(1);
-        Semaphore semJG = new Semaphore(1);
-        
-        Productor[] prodRuedas = new Productor[5];
-        Productor[] prodParabrisas = new Productor[3];
-        Productor[] prodMotores = new Productor[3];
-        Ensambladores[] ensambladoresA = new Ensambladores[3];
-        
-        for (int i = 0; i < productoresRuedasIniciales; i++) {
-            prodRuedas[i] = new Productor(semR, "r"," una rueda", semER, 
-                    diasDeProduccionRueda, duracionDelDia, semRG, almacenRuedas, 
-                    contadorRuedasProducidas);    
-        }
-        
-        for (int i = 0; i < productoresMotoresIniciales; i++) {
-            prodMotores[i] = new Productor(semM, "m", " un motor", semEM, 
-                    diasDeProduccionMotor, duracionDelDia, semMG,  almacenMotores, 
-                    contadorMotoresProducidos);
-        }
-        
-        for (int i = 0; i < productoresParabrisasIniciales; i++) {
-            prodParabrisas[i] = new Productor(semP, "p", " un parabrisas", semEP, 
-                    diasDeProduccionParabrisas, duracionDelDia, semPG,  
-                    almacenParabrisas, contadorParabrisasProducidos);
-        }
-        
-        for (int i = 0; i < ensambladoresIniciales; i++) {
-            ensambladoresA[i] = new Ensambladores(semR, "epa", semER, semM, semEM, 
-                semP, semEP, semRG, semPG, semMG, semGE, contadorCarrosProducidos, 
-                almacenRuedas, almacenParabrisas, almacenMotores, contadorRuedasConsumidas, 
-                contadorParabrisasConsumidos, contadorMotoresConsumidos);    
-        }
-          
-        Gerente ger = new Gerente(semJG, duracionDelDia, diasParaDespacho);
-        Jefe jef = new Jefe(semJG, duracionDelDia, diasParaDespacho, diasParaDespachoEstatico);
-        
-        
-        for (int i = 0; i < prodRuedas.length; i++) {
-            if (prodRuedas[i]!=null) {
-                prodRuedas[i].start();
-            }
-        }
-        
-        for (int i = 0; i < prodMotores.length; i++) {
-            if (prodMotores[i]!=null) {
-                prodMotores[i].start();
-            }
-        }
-        for (int i = 0; i < prodParabrisas.length; i++) {
-            if (prodParabrisas[i]!=null) {
-                prodParabrisas[i].start();
-            }
-        }
-        for (int i = 0; i < ensambladoresA.length; i++) {
-            if (ensambladoresA[i]!=null) {
-                ensambladoresA[i].start();
-            }
-        }
-        ger.start();
-        jef.start();
-    
     }
+    
+    
+    
+    
     public void contratarEnsamblador(int cantidadTrabajadores, Ensambladores[] ensambla, 
             Semaphore semR, String nombre,Semaphore semER, Semaphore semM,
             Semaphore semEM, Semaphore semP, Semaphore semEP, Semaphore semRG, 
@@ -862,6 +752,15 @@ public class Vista extends javax.swing.JFrame {
         cantidadTrabajadores--;
     }
     
+    /*public void constante(){
+        WheelMakerjTextField.setText(String.valueOf(productoresRuedasActuales));
+        WindshieldMakerjTextField.setText(String.valueOf(productoresParabirsasActuales));
+        EngineMakerjTextField.setText(String.valueOf(productoresMotoresActuales));
+        CarMakerjTextField.setText(String.valueOf(ensambladoresActuales));
+        WheelQuantityjTextField.setText(String.valueOf(contadorRuedasProducidas));
+        WindshieldQuantityjTextField.setText(String.valueOf(contadorParabrisasProducidos));
+        EngineQuantityjTextField.setText(String.valueOf(contadorMotoresProducidos));
+    }*/
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AcceptDayNumberjButton;
@@ -871,23 +770,23 @@ public class Vista extends javax.swing.JFrame {
     private javax.swing.JButton AddWindshieldMakerjButton;
     private javax.swing.JPanel AppjPanel;
     private javax.swing.JTextField BossjTextField;
-    private javax.swing.JTextField CarMakerjTextField;
-    private javax.swing.JTextField CarQuantityjTextField;
+    public javax.swing.JTextField CarMakerjTextField;
+    public javax.swing.JTextField CarQuantityjTextField;
     private javax.swing.JTextField DayNumberjTextField;
     private javax.swing.JButton DeleteCarMakerjButton;
     private javax.swing.JButton DeleteEngineMakerjButton;
     private javax.swing.JButton DeleteWheelMakerjButton;
     private javax.swing.JButton DeleteWindshieldMakerjButton;
-    private javax.swing.JTextField EngineMakerjTextField;
-    private javax.swing.JTextField EngineQuantityjTextField;
+    public javax.swing.JTextField EngineMakerjTextField;
+    public javax.swing.JTextField EngineQuantityjTextField;
     private javax.swing.JPanel MainjPanel;
-    private javax.swing.JTextField ManagerjTextField;
+    public javax.swing.JTextField ManagerjTextField;
     private javax.swing.JButton NoDefaultDaysjButton;
-    private javax.swing.JTextField RemainingDaysjTextField;
-    private javax.swing.JTextField WheelMakerjTextField;
-    private javax.swing.JTextField WheelQuantityjTextField;
-    private javax.swing.JTextField WindshieldMakerjTextField;
-    private javax.swing.JTextField WindshieldQuantityjTextField;
+    public javax.swing.JTextField RemainingDaysjTextField;
+    public javax.swing.JTextField WheelMakerjTextField;
+    public javax.swing.JTextField WheelQuantityjTextField;
+    public javax.swing.JTextField WindshieldMakerjTextField;
+    public javax.swing.JTextField WindshieldQuantityjTextField;
     private javax.swing.JButton YesDefaultDaysjButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
