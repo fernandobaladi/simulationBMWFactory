@@ -28,11 +28,7 @@ public class Vista extends javax.swing.JFrame {
     public Vista() {
         
         initComponents();
-        MainjPanel.setVisible(true);
-        jLabel1.setVisible(false);
-        DayNumberjTextField.setVisible(false);
-        AcceptDayNumberjButton.setVisible(false);
-        AppjPanel.setVisible(false);
+        AppjPanel.setVisible(true);
         WheelMakerjTextField.setEditable(false);
         WheelQuantityjTextField.setEditable(false);
         WindshieldMakerjTextField.setEditable(false);
@@ -53,20 +49,20 @@ public class Vista extends javax.swing.JFrame {
             WindshieldQuantityjTextField.setText(String.valueOf(contadorParabrisasProducidos));
             EngineQuantityjTextField.setText(String.valueOf(contadorMotoresProducidos));
         */
-        DayNumberjTextField.addKeyListener(new KeyAdapter() {
-           public void keyTyped(KeyEvent event)
-           {
-              char character = event.getKeyChar();
-
-              // Verifica si la tecla pulsada por el usuario no es un digito
-              if(((character < '0') ||
-                 (character > '9')) &&
-                 (character != '\b'))  // el backspace
-              {
-                 event.consume();  // ignorar el teclado
-              }
-           }
-        });
+//        DayNumberjTextField.addKeyListener(new KeyAdapter() {
+//           public void keyTyped(KeyEvent event)
+//           {
+//              char character = event.getKeyChar();
+//
+//              // Verifica si la tecla pulsada por el usuario no es un digito
+//              if(((character < '0') ||
+//                 (character > '9')) &&
+//                 (character != '\b'))  // el backspace
+//              {
+//                 event.consume();  // ignorar el teclado
+//              }
+//           }
+//        });
     }
     
     
@@ -80,13 +76,6 @@ public class Vista extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        MainjPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        DayNumberjTextField = new javax.swing.JTextField();
-        AcceptDayNumberjButton = new javax.swing.JButton();
-        jLabel13 = new javax.swing.JLabel();
-        YesDefaultDaysjButton = new javax.swing.JButton();
-        NoDefaultDaysjButton = new javax.swing.JButton();
         AppjPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -120,102 +109,9 @@ public class Vista extends javax.swing.JFrame {
         WheelMakerjTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(650, 700));
+        setPreferredSize(new java.awt.Dimension(650, 700));
         setResizable(false);
-
-        MainjPanel.setBackground(new java.awt.Color(160, 246, 210));
-        MainjPanel.setMaximumSize(new java.awt.Dimension(600, 650));
-        MainjPanel.setMinimumSize(new java.awt.Dimension(600, 650));
-        MainjPanel.setPreferredSize(new java.awt.Dimension(600, 650));
-
-        jLabel1.setBackground(new java.awt.Color(160, 246, 210));
-        jLabel1.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 18)); // NOI18N
-        jLabel1.setText("Ingrese la cantidad de días de trabajo");
-
-        DayNumberjTextField.setBackground(new java.awt.Color(3, 65, 77));
-        DayNumberjTextField.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 18)); // NOI18N
-        DayNumberjTextField.setForeground(new java.awt.Color(255, 255, 255));
-        DayNumberjTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        DayNumberjTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DayNumberjTextFieldActionPerformed(evt);
-            }
-        });
-
-        AcceptDayNumberjButton.setBackground(new java.awt.Color(114, 223, 208));
-        AcceptDayNumberjButton.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 16)); // NOI18N
-        AcceptDayNumberjButton.setText("Aceptar");
-        AcceptDayNumberjButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(204, 204, 204), null, new java.awt.Color(204, 204, 204)));
-        AcceptDayNumberjButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AcceptDayNumberjButtonActionPerformed(evt);
-            }
-        });
-
-        jLabel13.setBackground(new java.awt.Color(160, 246, 210));
-        jLabel13.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 18)); // NOI18N
-        jLabel13.setText("¿Deseas utilizar la cantidad de días predeterminada?");
-
-        YesDefaultDaysjButton.setBackground(new java.awt.Color(114, 223, 208));
-        YesDefaultDaysjButton.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 16)); // NOI18N
-        YesDefaultDaysjButton.setText("Si");
-        YesDefaultDaysjButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(204, 204, 204), null, new java.awt.Color(204, 204, 204)));
-        YesDefaultDaysjButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                YesDefaultDaysjButtonActionPerformed(evt);
-            }
-        });
-
-        NoDefaultDaysjButton.setBackground(new java.awt.Color(114, 223, 208));
-        NoDefaultDaysjButton.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 16)); // NOI18N
-        NoDefaultDaysjButton.setText("No");
-        NoDefaultDaysjButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(204, 204, 204), null, new java.awt.Color(204, 204, 204)));
-        NoDefaultDaysjButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NoDefaultDaysjButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout MainjPanelLayout = new javax.swing.GroupLayout(MainjPanel);
-        MainjPanel.setLayout(MainjPanelLayout);
-        MainjPanelLayout.setHorizontalGroup(
-            MainjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(MainjPanelLayout.createSequentialGroup()
-                .addGroup(MainjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(MainjPanelLayout.createSequentialGroup()
-                        .addGap(74, 74, 74)
-                        .addComponent(jLabel13))
-                    .addGroup(MainjPanelLayout.createSequentialGroup()
-                        .addGap(157, 157, 157)
-                        .addComponent(YesDefaultDaysjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(NoDefaultDaysjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(MainjPanelLayout.createSequentialGroup()
-                        .addGap(117, 117, 117)
-                        .addGroup(MainjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(MainjPanelLayout.createSequentialGroup()
-                                .addComponent(DayNumberjTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(AcceptDayNumberjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(74, Short.MAX_VALUE))
-        );
-        MainjPanelLayout.setVerticalGroup(
-            MainjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MainjPanelLayout.createSequentialGroup()
-                .addContainerGap(390, Short.MAX_VALUE)
-                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(MainjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(YesDefaultDaysjButton, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                    .addComponent(NoDefaultDaysjButton, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(MainjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(AcceptDayNumberjButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(DayNumberjTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(57, 57, 57))
-        );
 
         AppjPanel.setBackground(new java.awt.Color(160, 246, 210));
         AppjPanel.setMaximumSize(new java.awt.Dimension(600, 650));
@@ -574,27 +470,19 @@ public class Vista extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(MainjPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(AppjPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(612, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(AppjPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(MainjPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(AppjPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void DayNumberjTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DayNumberjTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DayNumberjTextFieldActionPerformed
 
     private void WheelQuantityjTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WheelQuantityjTextFieldActionPerformed
         // TODO add your handling code here:
@@ -636,43 +524,9 @@ public class Vista extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_RemainingDaysjTextFieldActionPerformed
 
-    private void AcceptDayNumberjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AcceptDayNumberjButtonActionPerformed
-        // TODO add your handling code here:
-        
-        
-        if(DayNumberjTextField.getText().equals("")){
-        
-            JOptionPane.showMessageDialog(null, "Debes llenar el campo para poder comenzar");
-        }
-        else{
-        
-            MainjPanel.setVisible(false);
-            AppjPanel.setVisible(true);
-        }
-        
-    }//GEN-LAST:event_AcceptDayNumberjButtonActionPerformed
-
     private void WheelMakerjTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WheelMakerjTextFieldActionPerformed
 
     }//GEN-LAST:event_WheelMakerjTextFieldActionPerformed
-
-    private void YesDefaultDaysjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YesDefaultDaysjButtonActionPerformed
-        // TODO add your handling code here:
-        MainjPanel.setVisible(false);
-        AppjPanel.setVisible(true);
-        
-    }//GEN-LAST:event_YesDefaultDaysjButtonActionPerformed
-
-    private void NoDefaultDaysjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NoDefaultDaysjButtonActionPerformed
-        // TODO add your handling code here:
-        jLabel1.setVisible(true);
-        DayNumberjTextField.setVisible(true);
-        AcceptDayNumberjButton.setVisible(true);
-        jLabel13.setVisible(false);
-        YesDefaultDaysjButton.setVisible(false);
-        NoDefaultDaysjButton.setVisible(false);
-        
-    }//GEN-LAST:event_NoDefaultDaysjButtonActionPerformed
 
     private void DeleteWheelMakerjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteWheelMakerjButtonActionPerformed
     }//GEN-LAST:event_DeleteWheelMakerjButtonActionPerformed
@@ -763,36 +617,29 @@ public class Vista extends javax.swing.JFrame {
     }*/
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AcceptDayNumberjButton;
     private javax.swing.JButton AddCarMakerjButton;
     private javax.swing.JButton AddEngineMakerjButton;
     private javax.swing.JButton AddWheelMakerjButton;
     private javax.swing.JButton AddWindshieldMakerjButton;
     private javax.swing.JPanel AppjPanel;
-    private javax.swing.JTextField BossjTextField;
+    public javax.swing.JTextField BossjTextField;
     public javax.swing.JTextField CarMakerjTextField;
     public javax.swing.JTextField CarQuantityjTextField;
-    private javax.swing.JTextField DayNumberjTextField;
     private javax.swing.JButton DeleteCarMakerjButton;
     private javax.swing.JButton DeleteEngineMakerjButton;
     private javax.swing.JButton DeleteWheelMakerjButton;
     private javax.swing.JButton DeleteWindshieldMakerjButton;
     public javax.swing.JTextField EngineMakerjTextField;
     public javax.swing.JTextField EngineQuantityjTextField;
-    private javax.swing.JPanel MainjPanel;
     public javax.swing.JTextField ManagerjTextField;
-    private javax.swing.JButton NoDefaultDaysjButton;
     public javax.swing.JTextField RemainingDaysjTextField;
     public javax.swing.JTextField WheelMakerjTextField;
     public javax.swing.JTextField WheelQuantityjTextField;
     public javax.swing.JTextField WindshieldMakerjTextField;
     public javax.swing.JTextField WindshieldQuantityjTextField;
-    private javax.swing.JButton YesDefaultDaysjButton;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -13,33 +13,34 @@ import java.util.concurrent.Semaphore;
  */
 public class Jefe extends Thread {
     
-    int dia, tiempoDeCambio, diasParaDespacho;
-    int contador;
+    int tiempoDeCambio, contador;
     Semaphore JG;
-    
-    public Jefe(Semaphore JG, int dia, int contador, int diasParaDespacho){
-        this.dia = dia;
+    boolean modifica = false;
+    public Jefe(Semaphore JG){
         this.JG = JG;
-        this.contador = contador;
-        this.tiempoDeCambio = dia/24;
-        this.diasParaDespacho = diasParaDespacho;
+        this.tiempoDeCambio = (Fabrica.duracionDelDia*3)/48;
     }
     
     public void run(){
         while(true){
             try{
-                while(this.JG.availablePermits()!=0){
-                    this.JG.acquire();
-                        Thread.sleep(tiempoDeCambio);
-                        if(this.contador != 0){
-                            this.contador--;
-                            //System.out.println("Faltan " + this.contador + " días para despachar.");
-                        }else{
-                           this.contador = this.diasParaDespacho;
-                        }
-                }
+                Fabrica.estadoJefe = ("Esperando");
+                this.JG.acquire();
+                    this.modifica = true;    
+                    Fabrica.estadoJefe = ("Modificando");
+                    Thread.sleep(tiempoDeCambio);
+                    if(Fabrica.diasParaDespacho != 0){
+                        Fabrica.diasParaDespacho--;
+                        //System.out.println("Faltan " + this.contador + " días para despachar.");
+                    }else{
+                        Fabrica.diasParaDespacho = Fabrica.diasParaDespachoEstatico;
+                    }
                 this.JG.release();
-                Thread.sleep(this.dia - this.tiempoDeCambio);
+                if (modifica) {
+                    this.modifica = false;
+                    Fabrica.estadoJefe = ("Durmiendo");
+                    Thread.sleep(Fabrica.duracionDelDia - this.tiempoDeCambio);
+                }
             
             }catch(InterruptedException ex){
                 System.out.println("Mamaste");

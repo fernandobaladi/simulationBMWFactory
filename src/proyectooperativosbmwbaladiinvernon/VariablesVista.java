@@ -22,7 +22,11 @@ public class VariablesVista {
     public String estadoDelJefe;
     public String estadoDelGerente;
 
-    public VariablesVista(int ensambladoresActuales, int productoresRuedasActuales, int productoresMotoresActuales, int productoresParabirsasActuales, int contadorRuedasProducidas, int contadorMotoresProducidos, int contadorParabrisasProducidos, int contadorCarrosProducidos, int diasParaDespacho) {
+    public VariablesVista(int ensambladoresActuales, int productoresRuedasActuales, 
+            int productoresMotoresActuales, int productoresParabirsasActuales, 
+            int contadorRuedasProducidas, int contadorMotoresProducidos, 
+            int contadorParabrisasProducidos, int contadorCarrosProducidos, 
+            int diasParaDespacho, String estadoJefe, String estadoGerente) {
         this.ensambladoresActuales = ensambladoresActuales;
         this.productoresRuedasActuales = productoresRuedasActuales;
         this.productoresMotoresActuales = productoresMotoresActuales;
@@ -32,8 +36,10 @@ public class VariablesVista {
         this.contadorParabrisasProducidos = contadorParabrisasProducidos;
         this.contadorCarrosProducidos = contadorCarrosProducidos;
         this.diasParaDespacho = diasParaDespacho;
+        this.estadoDelGerente = estadoGerente;
+        this.estadoDelJefe = estadoJefe;
     }
-
+    
     public int getEnsambladoresActuales() {
         return ensambladoresActuales;
     }

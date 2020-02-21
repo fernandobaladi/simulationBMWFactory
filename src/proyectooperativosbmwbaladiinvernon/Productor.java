@@ -44,20 +44,22 @@ public class Productor extends Thread{
                 if (this.tipoDePieza==1) {
                     Fabrica.almacenRuedas[(Fabrica.contadorRuedasProducidas%Fabrica.almacenRuedas.length)] = true;
                     Fabrica.contadorRuedasProducidas++;
-                    System.out.println(Fabrica.contadorRuedasProducidas + " de " + objeto);
-                    System.out.println(this.sem.availablePermits());
+                    //System.out.println(Fabrica.contadorRuedasProducidas + " de " + objeto);
+                    //System.out.println(this.sem.availablePermits());
                 }
 
                 if (this.tipoDePieza==2) {
                     Fabrica.almacenMotores[(Fabrica.contadorMotoresProducidos%Fabrica.almacenMotores.length)] = true;
                     Fabrica.contadorMotoresProducidos++;
                     //System.out.println( Fabrica.contadorMotoresProducidos + " de " + objeto);
+                    //System.out.println(this.sem.availablePermits());
                 }
                 
                 if (this.tipoDePieza==3) {
                     Fabrica.almacenParabrisas[(Fabrica.contadorParabrisasProducidos%Fabrica.almacenParabrisas.length)] = true;
                     Fabrica.contadorParabrisasProducidos++;
-                    //System.out.println( Fabrica.contadorParabrisasProducidos + " de " + objeto);
+                    System.out.println( Fabrica.contadorParabrisasProducidos + " de " + objeto);
+                    System.out.println(this.sem.availablePermits());                
                 }
                 
                 this.semEX.release();

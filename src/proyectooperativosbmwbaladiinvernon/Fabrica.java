@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.concurrent.Semaphore;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -46,6 +47,8 @@ public final class Fabrica {
     public static int productoresRuedasActuales;
     public static int productoresMotoresActuales;
     public static int productoresParabirsasActuales;
+    public static volatile String estadoGerente = "Nuevo";
+    public static volatile String estadoJefe = "Nuevo";
     File archivoBase = new File("archivoBase.txt"); 
     public static Productor[] prodRuedas;
     public static Productor[] prodParabrisas;
@@ -54,104 +57,102 @@ public final class Fabrica {
     public static Vista vista;
     public Gerente ger;
     public Jefe jef;
-    
+    public static volatile boolean iniciar = false;
     public Fabrica() {
         
         
         this.LeerInformacion();     
-        
-        variablesVarias = new VariablesVista(ensambladoresActuales, 
-        productoresRuedasActuales, productoresMotoresActuales, 
-        productoresParabirsasActuales, contadorRuedasProducidas, 
-        contadorMotoresProducidos, contadorParabrisasProducidos, 
-        contadorCarrosProducidos, diasParaDespacho);
-        contadorCarrosProducidos = 0;
-        contadorRuedasProducidas = 0;
-        contadorRuedasConsumidas = 0;
-        contadorParabrisasConsumidos = 0;
-        contadorParabrisasProducidos = 0;
-        contadorMotoresConsumidos = 0;
-        contadorMotoresProducidos = 0;
-        
-        
-        productoresMotoresActuales = productoresMotoresIniciales;
-        productoresParabirsasActuales = productoresParabrisasIniciales;
-        productoresRuedasActuales = productoresRuedasIniciales;
-        ensambladoresActuales = ensambladoresIniciales;
-        
-        //Días de producción por productor
-        diasDeProduccionMotor = 3;
-        diasDeProduccionParabrisas = 2;
-        diasDeProduccionRueda = 1;
-        diasDeEnsamblaje = 2;
-        
-        almacenRuedas = new boolean[disponibilidadMaximaRuedas];
-        almacenParabrisas = new boolean[disponibilidadMaximaParabrisas];
-        almacenMotores = new boolean[disponibilidadMaximaMotores];
-        System.out.println(ensambladoresIniciales);
-        System.out.println(disponibilidadMaximaRuedas);
-        //Semáforos de exclusión mutua
-        Semaphore semRG = new Semaphore(1);
-        Semaphore semMG = new Semaphore(1);
-        Semaphore semPG = new Semaphore(1);
-        
-        //semáforos de control
-        Semaphore semR = new Semaphore(disponibilidadMaximaRuedas);
-        System.out.println(semR.availablePermits());
-        Semaphore semER = new Semaphore(-3);
-        Semaphore semM = new Semaphore(disponibilidadMaximaMotores);
-        Semaphore semP = new Semaphore(disponibilidadMaximaParabrisas);
-        Semaphore semEM = new Semaphore(0);
-        Semaphore semEP = new Semaphore(0);
-        
-        //Semáforos gerenciales
-        Semaphore semGE = new Semaphore(1);
-        Semaphore semJG = new Semaphore(1);
-        
-        
-        vista = new Vista();
-        vista.setVisible(true);
-        vista.setResizable(false);
-        vista.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        vista.setLocationRelativeTo(null);
-        vista.WheelMakerjTextField.setText(String.valueOf(productoresRuedasActuales));
-        vista.WindshieldMakerjTextField.setText(String.valueOf(productoresParabirsasActuales));
-        vista.EngineMakerjTextField.setText(String.valueOf(productoresMotoresActuales));
-        vista.CarMakerjTextField.setText(String.valueOf(ensambladoresActuales));
-        vista.WheelQuantityjTextField.setText(String.valueOf(contadorRuedasProducidas));
-        vista.WindshieldQuantityjTextField.setText(String.valueOf(contadorParabrisasProducidos));
-        vista.EngineQuantityjTextField.setText(String.valueOf(contadorMotoresProducidos));
-        vista.CarQuantityjTextField.setText(String.valueOf(contadorCarrosProducidos));
-        
-        for (int i = 0; i < productoresRuedasIniciales; i++) {
-            System.out.println(i);
-            System.out.println(productoresRuedasIniciales);
-            prodRuedas[i] = new Productor(semR, "r"," una rueda", semER, 
-                    diasDeProduccionRueda, duracionDelDia, semRG, almacenRuedas,1);    
-        }
-        
-        for (int i = 0; i < productoresMotoresIniciales; i++) {
-            prodMotores[i] = new Productor(semM, "m", " un motor", semEM, 
-                    diasDeProduccionMotor, duracionDelDia, semMG,  almacenMotores,2);
-        }
-        
-        for (int i = 0; i < productoresParabrisasIniciales; i++) {
-            prodParabrisas[i] = new Productor(semP, "p", " un parabrisas", semEP, 
-                    diasDeProduccionParabrisas, duracionDelDia, semPG,  
-                    almacenParabrisas,3);
-        }
-        
-        for (int i = 0; i < ensambladoresIniciales; i++) {
-            ensambladoresA[i] = new Ensambladores(semR, "epa", semER, semM, semEM, 
-                semP, semEP, semRG, semPG, semMG, semGE, contadorCarrosProducidos, 
-                almacenRuedas, almacenParabrisas, almacenMotores, contadorRuedasConsumidas, 
-                contadorParabrisasConsumidos, contadorMotoresConsumidos);    
-        }
+        if(iniciar){
+            System.out.println(iniciar);
+            variablesVarias = new VariablesVista(ensambladoresActuales, 
+            productoresRuedasActuales, productoresMotoresActuales, 
+            productoresParabirsasActuales, contadorRuedasProducidas, 
+            contadorMotoresProducidos, contadorParabrisasProducidos, 
+            contadorCarrosProducidos, diasParaDespacho, estadoJefe, estadoGerente);
+            contadorCarrosProducidos = 0;
+            contadorRuedasProducidas = 0;
+            contadorRuedasConsumidas = 0;
+            contadorParabrisasConsumidos = 0;
+            contadorParabrisasProducidos = 0;
+            contadorMotoresConsumidos = 0;
+            contadorMotoresProducidos = 0;
 
-        ger = new Gerente(semJG, duracionDelDia, diasParaDespacho);
-        jef = new Jefe(semJG, duracionDelDia, diasParaDespacho, diasParaDespachoEstatico);
-        iniciarFabrica();
-        
+
+            productoresMotoresActuales = productoresMotoresIniciales;
+            productoresParabirsasActuales = productoresParabrisasIniciales;
+            productoresRuedasActuales = productoresRuedasIniciales;
+            ensambladoresActuales = ensambladoresIniciales;
+
+            //Días de producción por productor
+            diasDeProduccionMotor = 3;
+            diasDeProduccionParabrisas = 2;
+            diasDeProduccionRueda = 1;
+            diasDeEnsamblaje = 2;
+
+            almacenRuedas = new boolean[disponibilidadMaximaRuedas];
+            almacenParabrisas = new boolean[disponibilidadMaximaParabrisas];
+            almacenMotores = new boolean[disponibilidadMaximaMotores];
+            //Semáforos de exclusión mutua
+            Semaphore semRG = new Semaphore(1);
+            Semaphore semMG = new Semaphore(1);
+            Semaphore semPG = new Semaphore(1);
+
+            //semáforos de control
+            Semaphore semR = new Semaphore(disponibilidadMaximaRuedas);
+            Semaphore semER = new Semaphore(-3);
+            Semaphore semM = new Semaphore(disponibilidadMaximaMotores);
+            Semaphore semP = new Semaphore(disponibilidadMaximaParabrisas);
+            Semaphore semEM = new Semaphore(0);
+            Semaphore semEP = new Semaphore(0);
+
+            //Semáforos gerenciales
+            Semaphore semGE = new Semaphore(1);
+            Semaphore semJG = new Semaphore(1);
+
+
+            vista = new Vista();
+            vista.setVisible(true);
+            vista.setResizable(false);
+            vista.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            vista.setLocationRelativeTo(null);
+            vista.WheelMakerjTextField.setText(String.valueOf(productoresRuedasActuales));
+            vista.WindshieldMakerjTextField.setText(String.valueOf(productoresParabirsasActuales));
+            vista.EngineMakerjTextField.setText(String.valueOf(productoresMotoresActuales));
+            vista.CarMakerjTextField.setText(String.valueOf(ensambladoresActuales));
+            vista.WheelQuantityjTextField.setText(String.valueOf(contadorRuedasProducidas));
+            vista.WindshieldQuantityjTextField.setText(String.valueOf(contadorParabrisasProducidos));
+            vista.EngineQuantityjTextField.setText(String.valueOf(contadorMotoresProducidos));
+            vista.CarQuantityjTextField.setText(String.valueOf(contadorCarrosProducidos));
+            vista.ManagerjTextField.setText(estadoGerente);
+            vista.BossjTextField.setText(estadoJefe);
+
+            for (int i = 0; i < productoresRuedasIniciales; i++) {
+                prodRuedas[i] = new Productor(semR, "r"," una rueda", semER, 
+                        diasDeProduccionRueda, duracionDelDia, semRG, almacenRuedas,1);    
+            }
+
+            for (int i = 0; i < productoresMotoresIniciales; i++) {
+                prodMotores[i] = new Productor(semM, "m", " un motor", semEM, 
+                        diasDeProduccionMotor, duracionDelDia, semMG,  almacenMotores,2);
+            }
+
+            for (int i = 0; i < productoresParabrisasIniciales; i++) {
+                prodParabrisas[i] = new Productor(semP, "p", " un parabrisas", semEP, 
+                        diasDeProduccionParabrisas, duracionDelDia, semPG,  
+                        almacenParabrisas,3);
+            }
+
+            for (int i = 0; i < ensambladoresIniciales; i++) {
+                ensambladoresA[i] = new Ensambladores(semR, "epa", semER, semM, semEM, 
+                    semP, semEP, semRG, semPG, semMG, semGE, contadorCarrosProducidos, 
+                    almacenRuedas, almacenParabrisas, almacenMotores, contadorRuedasConsumidas, 
+                    contadorParabrisasConsumidos, contadorMotoresConsumidos);    
+            }
+
+            ger = new Gerente(semJG, semGE);
+            jef = new Jefe(semJG);
+            iniciarFabrica();
+        }
         
     }
     
@@ -184,7 +185,7 @@ public final class Fabrica {
     }
     
     public void verificador(){
-        while(true){
+        while(iniciar){
             
             if (variablesVarias.getContadorCarrosProducidos() != contadorCarrosProducidos) {
                 variablesVarias.setContadorCarrosProducidos(contadorCarrosProducidos);
@@ -229,8 +230,18 @@ public final class Fabrica {
             if (variablesVarias.getDiasParaDespacho() != diasParaDespacho) {
                 variablesVarias.setDiasParaDespacho(diasParaDespacho);
                 vista.RemainingDaysjTextField.setText(String.valueOf(diasParaDespacho));
-                System.out.println("Entré aquí");
             }
+            
+            if (!variablesVarias.getEstadoDelJefe().equals(this.estadoJefe)) {
+                variablesVarias.setEstadoDelJefe(this.estadoJefe);
+                vista.BossjTextField.setText(this.estadoJefe);
+            }
+
+            if (!variablesVarias.getEstadoDelGerente().equals(this.estadoGerente)) {
+                variablesVarias.setEstadoDelGerente(this.estadoGerente);
+                vista.ManagerjTextField.setText(this.estadoGerente);
+            }
+
         }
     }
     
@@ -258,7 +269,6 @@ public final class Fabrica {
             aux = bf.readLine();
             arrayAux = aux.split(":");
             prodRuedas = new Productor[Integer.parseInt(arrayAux[1])];
-            System.out.println(arrayAux[1]);
             aux = bf.readLine();
             arrayAux = aux.split(":");
             prodParabrisas = new Productor[Integer.parseInt(arrayAux[1])];
@@ -274,6 +284,13 @@ public final class Fabrica {
             aux = bf.readLine();
             arrayAux = aux.split(":");
             productoresParabrisasIniciales = Integer.parseInt(arrayAux[1]);
+            if ((productoresParabrisasIniciales > prodParabrisas.length) || productoresParabrisasIniciales <= 0) {
+                JOptionPane.showMessageDialog(null, "Inconsistencia de datos en los productores");
+                System.out.println("Aquí ando");
+            }else{
+                System.out.println("Aquí estoy");
+                iniciar = true;
+            }
             aux = bf.readLine();
             arrayAux = aux.split(":");
             productoresMotoresIniciales = Integer.parseInt(arrayAux[1]);
@@ -282,7 +299,7 @@ public final class Fabrica {
             ensambladoresIniciales = Integer.parseInt(arrayAux[1]);
             
         }catch(Exception e){
-            System.out.println("No se logró leer la base de datos de películas");
+            System.out.println("No se logró leer la base de datos");
         }
     }
 }

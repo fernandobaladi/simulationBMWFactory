@@ -14,30 +14,38 @@ import java.util.concurrent.Semaphore;
  */
 public class Gerente extends Thread{
 
-    Semaphore JG;
-    int dia;
-    int contador;
-    boolean despacha = false;
-    public Gerente(Semaphore JG, int dia, int contador) {
+    Semaphore JG, GE;
+    boolean leyo = false;
+    public Gerente(Semaphore JG, Semaphore GE) {
         this.JG = JG;
-        this.dia = dia;
-        this.contador = contador;
+        this.GE = GE;
     }
     
     @Override
     public void run(){
         while(true){
             try{
+                Fabrica.estadoGerente = ("Esperando");
+                System.out.println(Fabrica.estadoGerente);
                 this.JG.acquire();
-                if (contador != 0) {
-                    this.JG.release();
+                this.leyo = true;
+                Fabrica.estadoGerente = ("Leyendo");
+                System.out.println(Fabrica.estadoGerente);
+                if (Fabrica.diasParaDespacho == 0) {
+                    this.GE.acquire();
+                    Fabrica.estadoGerente = ("Despachando");
+                    System.out.println(Fabrica.estadoGerente);
+                    Fabrica.contadorCarrosProducidos = 0;
+                    Fabrica.diasParaDespacho = Fabrica.diasParaDespachoEstatico;
+                    this.GE.release();
+                }       
+                this.JG.release();
+                if (leyo) {
+                    Fabrica.estadoGerente = ("Durmiendo");
+                    System.out.println(Fabrica.estadoGerente);
                     Thread.sleep(tiempoDurmiendo());
-                }else{
-                    despacha = true;
-                    System.out.println("Nos quedamos sin conta");
-                    Thread.sleep(tiempoDurmiendo());
-                    despacha = false;
-                }
+                    leyo = false;
+                }    
             }catch(InterruptedException ex){
                 System.out.println("Mamaste");
             }
@@ -48,7 +56,7 @@ public class Gerente extends Thread{
     public int tiempoDurmiendo(){
         int n = (int)(Math.random() * 13 + 6);
         double f =((double)n/24);
-        int t =  (int)(this.dia * f);
+        int t =  (int)(Fabrica.duracionDelDia * f);
         return t;
     }
 }
