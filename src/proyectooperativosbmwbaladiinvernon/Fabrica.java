@@ -284,6 +284,12 @@ public final class Fabrica {
             aux = bf.readLine();
             arrayAux = aux.split(":");
             productoresParabrisasIniciales = Integer.parseInt(arrayAux[1]);
+            aux = bf.readLine();
+            arrayAux = aux.split(":");
+            productoresMotoresIniciales = Integer.parseInt(arrayAux[1]);
+            aux = bf.readLine();
+            arrayAux = aux.split(":");
+            ensambladoresIniciales = Integer.parseInt(arrayAux[1]);
             if ((productoresParabrisasIniciales > prodParabrisas.length) || productoresParabrisasIniciales <= 0) {
                 JOptionPane.showMessageDialog(null, "Inconsistencia de datos en los productores");
                 System.out.println("Aquí ando");
@@ -291,13 +297,7 @@ public final class Fabrica {
                 System.out.println("Aquí estoy");
                 iniciar = true;
             }
-            aux = bf.readLine();
-            arrayAux = aux.split(":");
-            productoresMotoresIniciales = Integer.parseInt(arrayAux[1]);
-            aux = bf.readLine();
-            arrayAux = aux.split(":");
-            ensambladoresIniciales = Integer.parseInt(arrayAux[1]);
-            
+            bf.close();
         }catch(Exception e){
             System.out.println("No se logró leer la base de datos");
         }
