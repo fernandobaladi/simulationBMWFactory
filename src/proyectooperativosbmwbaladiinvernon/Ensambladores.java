@@ -42,8 +42,8 @@ public class Ensambladores extends Thread {
                 this.semRG.acquire();
                 this.semPG.acquire();
                 this.semMG.acquire();
-                
-                this.produje = true;
+                if(contratado){
+                    this.produje = true;
                     for (int i = 0; i < 4; i++) {
                         Fabrica.almacenRuedas[Fabrica.contadorRuedasConsumidas%Fabrica.almacenRuedas.length]= false;
                         Fabrica.contadorRuedasConsumidas++;
@@ -71,12 +71,11 @@ public class Ensambladores extends Thread {
                     for (int i = 0; i < Fabrica.almacenMotores.length; i++) {
                         System.out.println("Numero "+i+": "+Fabrica.almacenMotores[i]);
                     }
-                    System.out.println("hola:");
                     System.out.println("Se puede entrar " + this.semEM + " veces más (Semáforo ensamblador)");
                     System.out.println("Se puede entrar " + this.semMG + " veces más (Semáforo exclusión mutua)");
                     System.out.println("Se puede entrar " + this.semM + " veces más (Semáforo productor)");
                     System.out.println("-----------------------------------");
-                
+                }
                 this.semMG.release();
                 this.semPG.release();
                 this.semRG.release();

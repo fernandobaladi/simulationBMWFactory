@@ -283,7 +283,11 @@ public final class Fabrica {
             case 4:
                 if(ensambladoresActuales > 0){
                     ensambladoresActuales--;
-                    ensambladoresA[ensambladoresActuales].setContratado(false);
+                    /*while(ensambladoresA[ensambladoresActuales].contratado){
+                        if (!ensambladoresA[ensambladoresActuales].produje){ */
+                            ensambladoresA[ensambladoresActuales].setContratado(false);
+                       /* }
+                    }*/
                 }
                 break;    
             default:
