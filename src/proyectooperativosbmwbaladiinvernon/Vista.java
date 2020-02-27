@@ -141,6 +141,11 @@ public class Vista extends javax.swing.JFrame {
         AddWheelMakerjButton.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 14)); // NOI18N
         AddWheelMakerjButton.setText("+");
         AddWheelMakerjButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(204, 204, 204), null, new java.awt.Color(204, 204, 204)));
+        AddWheelMakerjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddWheelMakerjButtonActionPerformed(evt);
+            }
+        });
 
         DeleteWheelMakerjButton.setBackground(new java.awt.Color(114, 223, 208));
         DeleteWheelMakerjButton.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 14)); // NOI18N
@@ -160,6 +165,11 @@ public class Vista extends javax.swing.JFrame {
         DeleteWindshieldMakerjButton.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 14)); // NOI18N
         DeleteWindshieldMakerjButton.setText("-");
         DeleteWindshieldMakerjButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(204, 204, 204), null, new java.awt.Color(204, 204, 204)));
+        DeleteWindshieldMakerjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteWindshieldMakerjButtonActionPerformed(evt);
+            }
+        });
 
         WindshieldMakerjTextField.setBackground(new java.awt.Color(3, 65, 77));
         WindshieldMakerjTextField.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 16)); // NOI18N
@@ -175,6 +185,11 @@ public class Vista extends javax.swing.JFrame {
         AddWindshieldMakerjButton.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 14)); // NOI18N
         AddWindshieldMakerjButton.setText("+");
         AddWindshieldMakerjButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(204, 204, 204), null, new java.awt.Color(204, 204, 204)));
+        AddWindshieldMakerjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddWindshieldMakerjButtonActionPerformed(evt);
+            }
+        });
 
         WindshieldQuantityjTextField.setBackground(new java.awt.Color(3, 65, 77));
         WindshieldQuantityjTextField.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 16)); // NOI18N
@@ -212,6 +227,11 @@ public class Vista extends javax.swing.JFrame {
         AddEngineMakerjButton.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 14)); // NOI18N
         AddEngineMakerjButton.setText("+");
         AddEngineMakerjButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(204, 204, 204), null, new java.awt.Color(204, 204, 204)));
+        AddEngineMakerjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddEngineMakerjButtonActionPerformed(evt);
+            }
+        });
 
         EngineMakerjTextField.setBackground(new java.awt.Color(3, 65, 77));
         EngineMakerjTextField.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 16)); // NOI18N
@@ -227,6 +247,11 @@ public class Vista extends javax.swing.JFrame {
         DeleteEngineMakerjButton.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 14)); // NOI18N
         DeleteEngineMakerjButton.setText("-");
         DeleteEngineMakerjButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(204, 204, 204), null, new java.awt.Color(204, 204, 204)));
+        DeleteEngineMakerjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteEngineMakerjButtonActionPerformed(evt);
+            }
+        });
 
         jLabel8.setBackground(new java.awt.Color(160, 246, 210));
         jLabel8.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 18)); // NOI18N
@@ -237,6 +262,11 @@ public class Vista extends javax.swing.JFrame {
         DeleteCarMakerjButton.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 14)); // NOI18N
         DeleteCarMakerjButton.setText("-");
         DeleteCarMakerjButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(204, 204, 204), null, new java.awt.Color(204, 204, 204)));
+        DeleteCarMakerjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteCarMakerjButtonActionPerformed(evt);
+            }
+        });
 
         CarMakerjTextField.setBackground(new java.awt.Color(3, 65, 77));
         CarMakerjTextField.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 16)); // NOI18N
@@ -252,6 +282,11 @@ public class Vista extends javax.swing.JFrame {
         AddCarMakerjButton.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 14)); // NOI18N
         AddCarMakerjButton.setText("+");
         AddCarMakerjButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(204, 204, 204), null, new java.awt.Color(204, 204, 204)));
+        AddCarMakerjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddCarMakerjButtonActionPerformed(evt);
+            }
+        });
 
         jLabel9.setBackground(new java.awt.Color(160, 246, 210));
         jLabel9.setFont(new java.awt.Font("Nirmala UI Semilight", 1, 18)); // NOI18N
@@ -529,7 +564,36 @@ public class Vista extends javax.swing.JFrame {
     }//GEN-LAST:event_WheelMakerjTextFieldActionPerformed
 
     private void DeleteWheelMakerjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteWheelMakerjButtonActionPerformed
+        Fabrica.despedir(1);
     }//GEN-LAST:event_DeleteWheelMakerjButtonActionPerformed
+
+    private void AddWheelMakerjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddWheelMakerjButtonActionPerformed
+        Fabrica.contratar(1);
+    }//GEN-LAST:event_AddWheelMakerjButtonActionPerformed
+
+    private void AddWindshieldMakerjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddWindshieldMakerjButtonActionPerformed
+        Fabrica.contratar(2);
+    }//GEN-LAST:event_AddWindshieldMakerjButtonActionPerformed
+
+    private void AddEngineMakerjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddEngineMakerjButtonActionPerformed
+        Fabrica.contratar(3);
+    }//GEN-LAST:event_AddEngineMakerjButtonActionPerformed
+
+    private void AddCarMakerjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCarMakerjButtonActionPerformed
+        Fabrica.contratar(4);
+    }//GEN-LAST:event_AddCarMakerjButtonActionPerformed
+
+    private void DeleteWindshieldMakerjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteWindshieldMakerjButtonActionPerformed
+        Fabrica.despedir(2);
+    }//GEN-LAST:event_DeleteWindshieldMakerjButtonActionPerformed
+
+    private void DeleteEngineMakerjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteEngineMakerjButtonActionPerformed
+        Fabrica.despedir(3);
+    }//GEN-LAST:event_DeleteEngineMakerjButtonActionPerformed
+
+    private void DeleteCarMakerjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteCarMakerjButtonActionPerformed
+        Fabrica.despedir(4);
+    }//GEN-LAST:event_DeleteCarMakerjButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -571,7 +635,7 @@ public class Vista extends javax.swing.JFrame {
     
     
     
-    public void contratarEnsamblador(int cantidadTrabajadores, Ensambladores[] ensambla, 
+    /*public void contratarEnsamblador(int cantidadTrabajadores, Ensambladores[] ensambla, 
             Semaphore semR, String nombre,Semaphore semER, Semaphore semM,
             Semaphore semEM, Semaphore semP, Semaphore semEP, Semaphore semRG, 
             Semaphore semPG, Semaphore semMG, Semaphore semGE, int contadorCarrosProducidos, 
@@ -606,7 +670,7 @@ public class Vista extends javax.swing.JFrame {
         cantidadTrabajadores--;
     }
     
-    /*public void constante(){
+    public void constante(){
         WheelMakerjTextField.setText(String.valueOf(productoresRuedasActuales));
         WindshieldMakerjTextField.setText(String.valueOf(productoresParabirsasActuales));
         EngineMakerjTextField.setText(String.valueOf(productoresMotoresActuales));

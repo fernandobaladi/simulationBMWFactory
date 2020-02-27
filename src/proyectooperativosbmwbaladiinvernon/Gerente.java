@@ -26,15 +26,12 @@ public class Gerente extends Thread{
         while(true){
             try{
                 Fabrica.estadoGerente = ("Esperando");
-                System.out.println(Fabrica.estadoGerente);
                 this.JG.acquire();
                 this.leyo = true;
                 Fabrica.estadoGerente = ("Leyendo");
-                System.out.println(Fabrica.estadoGerente);
                 if (Fabrica.diasParaDespacho == 0) {
                     this.GE.acquire();
                     Fabrica.estadoGerente = ("Despachando");
-                    System.out.println(Fabrica.estadoGerente);
                     Fabrica.contadorCarrosProducidos = 0;
                     Fabrica.diasParaDespacho = Fabrica.diasParaDespachoEstatico;
                     this.GE.release();
@@ -42,7 +39,7 @@ public class Gerente extends Thread{
                 this.JG.release();
                 if (leyo) {
                     Fabrica.estadoGerente = ("Durmiendo");
-                    System.out.println(Fabrica.estadoGerente);
+                    //System.out.println(Fabrica.estadoGerente);
                     Thread.sleep(tiempoDurmiendo());
                     leyo = false;
                 }    

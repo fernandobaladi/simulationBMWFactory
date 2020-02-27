@@ -14,12 +14,8 @@ public class Ensambladores extends Thread {
     String nombre;
     Semaphore semR, semER, semM, semEM, semEP, semP, semMG, semPG, semRG, semGE;
     boolean contratado, produje;
-    boolean[] almacenRuedas, almacenParabrisas, almacenMotores;
-    int contadorCarros, contadorRuedasConsumidas, contadorParabrisasConsumidos, contadorMotoresConsumidos;
     public Ensambladores(Semaphore sem, String nombre, Semaphore sem2, Semaphore sem3, Semaphore sem4, 
-            Semaphore sem5, Semaphore sem6, Semaphore sem7, Semaphore sem8, Semaphore sem9, Semaphore sem10,
-            int contadorCarros, boolean[] almacenRuedas, boolean[] almacenParabirsas, boolean[] almacenMotores,
-            int contadorRuedasConsumidas, int contadorParabrisasConsumidos, int contadorMotoresConsumidos) {
+            Semaphore sem5, Semaphore sem6, Semaphore sem7, Semaphore sem8, Semaphore sem9, Semaphore sem10) {
         this.semR = sem;
         this.nombre = nombre;
         this.semER = sem2;
@@ -31,13 +27,6 @@ public class Ensambladores extends Thread {
         this.semPG = sem8;
         this.semMG = sem9;
         this.semGE = sem10;
-        this.contadorCarros = contadorCarros;
-        this.almacenRuedas = almacenRuedas;
-        this.almacenParabrisas = almacenParabirsas;
-        this.almacenMotores = almacenMotores;
-        this.contadorRuedasConsumidas = contadorRuedasConsumidas;
-        this.contadorParabrisasConsumidos = contadorParabrisasConsumidos;
-        this.contadorMotoresConsumidos = contadorMotoresConsumidos;
         this.contratado = true;
         this.produje = false;
     }
@@ -49,41 +38,56 @@ public class Ensambladores extends Thread {
                 this.semER.acquire(4);
                 this.semEM.acquire();
                 this.semEP.acquire();
+                
                 this.semRG.acquire();
                 this.semPG.acquire();
                 this.semMG.acquire();
                 
                 this.produje = true;
-                
-                for (int i = 0; i < 4; i++) {
-                    Fabrica.almacenRuedas[Fabrica.contadorRuedasConsumidas%Fabrica.almacenRuedas.length]= false;
-                    Fabrica.contadorRuedasConsumidas++;
-                    Fabrica.contadorRuedasProducidas--;
-                }
-                
-                Fabrica.almacenParabrisas[Fabrica.contadorParabrisasConsumidos%this.almacenParabrisas.length] = false;
-                Fabrica.contadorParabrisasConsumidos++;
-                Fabrica.contadorParabrisasProducidos--;
-                
-                Fabrica.almacenMotores[Fabrica.contadorMotoresConsumidos%Fabrica.almacenMotores.length] = false;
-                Fabrica.contadorMotoresConsumidos++;
-                Fabrica.contadorMotoresProducidos--;
+                    for (int i = 0; i < 4; i++) {
+                        Fabrica.almacenRuedas[Fabrica.contadorRuedasConsumidas%Fabrica.almacenRuedas.length]= false;
+                        Fabrica.contadorRuedasConsumidas++;
+                        Fabrica.contadorRuedasProducidasVistas--;
+                    }
+
+                    Fabrica.almacenParabrisas[Fabrica.contadorParabrisasConsumidos%Fabrica.almacenParabrisas.length] = false;
+                    Fabrica.contadorParabrisasConsumidos++;
+                    Fabrica.contadorParabrisasProducidosVista--;
+                    /*System.out.println("-----------------------------------");
+                    System.out.println("Se han consumido " + Fabrica.contadorParabrisasConsumidos + " parabrisas");
+                    System.out.println("Se muestran " + Fabrica.contadorParabrisasProducidosVista+ " parabrisas");
+                    System.out.println("Se han hecho " + Fabrica.contadorParabrisasProducidos + " parabrisas");
+                    System.out.println("Se puede entrar " + this.semEP + " veces más (Semáforo ensamblador)");
+                    System.out.println("Se puede entrar " + this.semPG + " veces más (Semáforo exclusión mutua)");
+                    System.out.println("Se puede entrar " + this.semP + " veces más (Semáforo productor)");
+                    System.out.println("-----------------------------------");*/
+                    Fabrica.almacenMotores[Fabrica.contadorMotoresConsumidos%Fabrica.almacenMotores.length] = false;
+                    Fabrica.contadorMotoresConsumidos++;
+                    Fabrica.contadorMotoresProducidosVista--;
+                    System.out.println("-----------------------------------");
+                    System.out.println("Se han consumido " + Fabrica.contadorMotoresConsumidos + " motores");
+                    System.out.println("Se muestran " + Fabrica.contadorMotoresProducidosVista+ " motores");
+                    System.out.println("Se han hecho " + Fabrica.contadorMotoresProducidos + " motores");
+                    System.out.println("Se puede entrar " + this.semEM + " veces más (Semáforo ensamblador)");
+                    System.out.println("Se puede entrar " + this.semMG + " veces más (Semáforo exclusión mutua)");
+                    System.out.println("Se puede entrar " + this.semM + " veces más (Semáforo productor)");
+                    System.out.println("-----------------------------------");
                 
                 this.semMG.release();
                 this.semPG.release();
                 this.semRG.release();
+                
                 this.semP.release();                
                 this.semM.release();
                 this.semR.release(4);
+                
                 if (this.produje) {
-                    Thread.sleep(2000);
-                    //semaforo GE acquire
-                    while(this.produje){
-                        this.semGE.acquire();
-                        Fabrica.contadorCarrosProducidos++;
-                        this.semGE.release();
-                        this.produje = false;
-                    }
+                    Thread.sleep(Fabrica.diasDeEnsamblaje*Fabrica.duracionDelDia);
+                    this.semGE.acquire();
+                    Fabrica.contadorCarrosProducidos++;
+                    this.semGE.release();
+                    this.produje = false;
+                    
                 }
                 
             }catch(InterruptedException ex){

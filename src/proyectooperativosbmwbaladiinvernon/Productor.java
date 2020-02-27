@@ -34,6 +34,9 @@ public class Productor extends Thread{
     }
 
     public void run(){
+        if (contratado && this.tipoDePieza ==2) {
+            System.out.println(semE);
+        }
         while(contratado){
             try{
                 
@@ -41,25 +44,28 @@ public class Productor extends Thread{
                 Thread.sleep(tiempoProducción);
                 this.semEX.acquire();
                 
-                if (this.tipoDePieza==1) {
+                if (this.tipoDePieza==1 && contratado) {
                     Fabrica.almacenRuedas[(Fabrica.contadorRuedasProducidas%Fabrica.almacenRuedas.length)] = true;
+                    Fabrica.contadorRuedasProducidasVistas++;
                     Fabrica.contadorRuedasProducidas++;
                     //System.out.println(Fabrica.contadorRuedasProducidas + " de " + objeto);
                     //System.out.println(this.sem.availablePermits());
                 }
 
-                if (this.tipoDePieza==2) {
+                if (this.tipoDePieza==2 && contratado) {
                     Fabrica.almacenMotores[(Fabrica.contadorMotoresProducidos%Fabrica.almacenMotores.length)] = true;
+                    Fabrica.contadorMotoresProducidosVista++;
                     Fabrica.contadorMotoresProducidos++;
                     //System.out.println( Fabrica.contadorMotoresProducidos + " de " + objeto);
                     //System.out.println(this.sem.availablePermits());
                 }
                 
-                if (this.tipoDePieza==3) {
+                if (this.tipoDePieza==3 && contratado) {
                     Fabrica.almacenParabrisas[(Fabrica.contadorParabrisasProducidos%Fabrica.almacenParabrisas.length)] = true;
+                    Fabrica.contadorParabrisasProducidosVista++;
                     Fabrica.contadorParabrisasProducidos++;
-                    System.out.println( Fabrica.contadorParabrisasProducidos + " de " + objeto);
-                    System.out.println(this.sem.availablePermits());                
+                    //ystem.out.println( Fabrica.contadorParabrisasProducidos + " de " + objeto);
+                    //System.out.println(this.sem.availablePermits());                
                 }
                 
                 this.semEX.release();
