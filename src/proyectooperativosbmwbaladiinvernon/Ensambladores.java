@@ -44,6 +44,7 @@ public class Ensambladores extends Thread {
                 this.semMG.acquire();
                 if(contratado){
                     this.produje = true;
+                    
                     for (int i = 0; i < 4; i++) {
                         Fabrica.almacenRuedas[Fabrica.contadorRuedasConsumidas%Fabrica.almacenRuedas.length]= false;
                         Fabrica.contadorRuedasConsumidas++;
@@ -53,28 +54,10 @@ public class Ensambladores extends Thread {
                     Fabrica.almacenParabrisas[Fabrica.contadorParabrisasConsumidos%Fabrica.almacenParabrisas.length] = false;
                     Fabrica.contadorParabrisasConsumidos++;
                     Fabrica.contadorParabrisasProducidosVista--;
-                    /*System.out.println("-----------------------------------");
-                    System.out.println("Se han consumido " + Fabrica.contadorParabrisasConsumidos + " parabrisas");
-                    System.out.println("Se muestran " + Fabrica.contadorParabrisasProducidosVista+ " parabrisas");
-                    System.out.println("Se han hecho " + Fabrica.contadorParabrisasProducidos + " parabrisas");
-                    System.out.println("Se puede entrar " + this.semEP + " veces más (Semáforo ensamblador)");
-                    System.out.println("Se puede entrar " + this.semPG + " veces más (Semáforo exclusión mutua)");
-                    System.out.println("Se puede entrar " + this.semP + " veces más (Semáforo productor)");
-                    System.out.println("-----------------------------------");*/
+                    
                     Fabrica.almacenMotores[Fabrica.contadorMotoresConsumidos%Fabrica.almacenMotores.length] = false;
                     Fabrica.contadorMotoresConsumidos++;
                     Fabrica.contadorMotoresProducidosVista--;
-                    System.out.println("-----------------------------------");
-                    System.out.println("Se han consumido " + Fabrica.contadorMotoresConsumidos + " motores");
-                    System.out.println("Se muestran " + Fabrica.contadorMotoresProducidosVista+ " motores");
-                    System.out.println("Se han hecho " + Fabrica.contadorMotoresProducidos + " motores");
-                    for (int i = 0; i < Fabrica.almacenMotores.length; i++) {
-                        System.out.println("Numero "+i+": "+Fabrica.almacenMotores[i]);
-                    }
-                    System.out.println("Se puede entrar " + this.semEM + " veces más (Semáforo ensamblador)");
-                    System.out.println("Se puede entrar " + this.semMG + " veces más (Semáforo exclusión mutua)");
-                    System.out.println("Se puede entrar " + this.semM + " veces más (Semáforo productor)");
-                    System.out.println("-----------------------------------");
                 }
                 this.semMG.release();
                 this.semPG.release();

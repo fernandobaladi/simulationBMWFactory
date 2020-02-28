@@ -39,7 +39,6 @@ public class Gerente extends Thread{
                 this.JG.release();
                 if (leyo) {
                     Fabrica.estadoGerente = ("Durmiendo");
-                    //System.out.println(Fabrica.estadoGerente);
                     Thread.sleep(tiempoDurmiendo());
                     leyo = false;
                 }    

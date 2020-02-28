@@ -31,7 +31,6 @@ public class Jefe extends Thread {
                     Thread.sleep(tiempoDeCambio);
                     if(Fabrica.diasParaDespacho != 0){
                         Fabrica.diasParaDespacho--;
-                        //System.out.println("Faltan " + this.contador + " días para despachar.");
                     }else{
                         Fabrica.diasParaDespacho = Fabrica.diasParaDespachoEstatico;
                     }

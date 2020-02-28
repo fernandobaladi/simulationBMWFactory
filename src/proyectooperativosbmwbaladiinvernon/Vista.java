@@ -40,29 +40,6 @@ public class Vista extends javax.swing.JFrame {
         BossjTextField.setEditable(false);
         ManagerjTextField.setEditable(false);
         RemainingDaysjTextField.setEditable(false);
-        /*
-            WheelMakerjTextField.setText(String.valueOf(productoresRuedasActuales));
-            WindshieldMakerjTextField.setText(String.valueOf(productoresParabirsasActuales));
-            EngineMakerjTextField.setText(String.valueOf(productoresMotoresActuales));
-            CarMakerjTextField.setText(String.valueOf(ensambladoresActuales));
-            WheelQuantityjTextField.setText(String.valueOf(contadorRuedasProducidas));
-            WindshieldQuantityjTextField.setText(String.valueOf(contadorParabrisasProducidos));
-            EngineQuantityjTextField.setText(String.valueOf(contadorMotoresProducidos));
-        */
-//        DayNumberjTextField.addKeyListener(new KeyAdapter() {
-//           public void keyTyped(KeyEvent event)
-//           {
-//              char character = event.getKeyChar();
-//
-//              // Verifica si la tecla pulsada por el usuario no es un digito
-//              if(((character < '0') ||
-//                 (character > '9')) &&
-//                 (character != '\b'))  // el backspace
-//              {
-//                 event.consume();  // ignorar el teclado
-//              }
-//           }
-//        });
     }
     
     
@@ -625,61 +602,11 @@ public class Vista extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                //new Vista().setVisible(true);
             }
         });
         
         
     }
-    
-    
-    
-    
-    /*public void contratarEnsamblador(int cantidadTrabajadores, Ensambladores[] ensambla, 
-            Semaphore semR, String nombre,Semaphore semER, Semaphore semM,
-            Semaphore semEM, Semaphore semP, Semaphore semEP, Semaphore semRG, 
-            Semaphore semPG, Semaphore semMG, Semaphore semGE, int contadorCarrosProducidos, 
-            boolean[] almacenRuedas, boolean[] almacenParabrisas, boolean[] almacenMotores,
-            int contadorRuedasConsumidas, int contadorParabrisasConsumidos, int contadorMotoresConsumidos){
-            ensambla[cantidadTrabajadores] = new Ensambladores(semR, nombre, semER, 
-                semM, semEM, semP, semEP, semRG, semPG, semMG, semGE, 
-                contadorCarrosProducidos, almacenRuedas, almacenParabrisas, 
-                almacenMotores, contadorRuedasConsumidas, contadorParabrisasConsumidos, 
-                contadorMotoresConsumidos);
-            ensambla[cantidadTrabajadores].start();
-            cantidadTrabajadores++;
-    }
-    
-    public void contratarProductor(int cantidadTrabajadores, Productor[] prod, 
-            Semaphore sem, String nombre, String tipoDeProducto,Semaphore semE, 
-            int diasDeProduccion, int duracionDelDia, Semaphore semG, 
-            boolean[] almacen, int contadorProducidos ){
-            
-                prod[cantidadTrabajadores] = new Productor(sem, nombre, tipoDeProducto, 
-                semE, diasDeProduccion, duracionDelDia, semG, almacen, contadorProducidos);
-                prod[cantidadTrabajadores].start();
-                cantidadTrabajadores++;
-    }
-    
-    public void despedir(int cantidadTrabajadores, Productor[] prod){
-        prod[cantidadTrabajadores].setContratado(false);
-        cantidadTrabajadores--;
-    }
-    public void despedir(int cantidadTrabajadores, Ensambladores[] ensambla){
-        ensambla[cantidadTrabajadores].setContratado(false);
-        cantidadTrabajadores--;
-    }
-    
-    public void constante(){
-        WheelMakerjTextField.setText(String.valueOf(productoresRuedasActuales));
-        WindshieldMakerjTextField.setText(String.valueOf(productoresParabirsasActuales));
-        EngineMakerjTextField.setText(String.valueOf(productoresMotoresActuales));
-        CarMakerjTextField.setText(String.valueOf(ensambladoresActuales));
-        WheelQuantityjTextField.setText(String.valueOf(contadorRuedasProducidas));
-        WindshieldQuantityjTextField.setText(String.valueOf(contadorParabrisasProducidos));
-        EngineQuantityjTextField.setText(String.valueOf(contadorMotoresProducidos));
-    }*/
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddCarMakerjButton;
     private javax.swing.JButton AddEngineMakerjButton;

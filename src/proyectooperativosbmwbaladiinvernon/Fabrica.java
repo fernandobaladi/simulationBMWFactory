@@ -111,24 +111,7 @@ public final class Fabrica {
             almacenRuedas = new boolean[disponibilidadMaximaRuedas];
             almacenParabrisas = new boolean[disponibilidadMaximaParabrisas];
             almacenMotores = new boolean[disponibilidadMaximaMotores];
-            /*
-            //Semáforos de exclusión mutua
-            Semaphore semRG = new Semaphore(1);
-            Semaphore semMG = new Semaphore(1);
-            Semaphore semPG = new Semaphore(1);
-
-            //semáforos de control
-            Semaphore semR = new Semaphore(disponibilidadMaximaRuedas);
-            Semaphore semER = new Semaphore(-3);
-            Semaphore semM = new Semaphore(disponibilidadMaximaMotores);
-            Semaphore semP = new Semaphore(disponibilidadMaximaParabrisas);
-            Semaphore semEM = new Semaphore(0);
-            Semaphore semEP = new Semaphore(0);
-
-            //Semáforos gerenciales
-            Semaphore semGE = new Semaphore(1);
-            Semaphore semJG = new Semaphore(1);*/
-
+            
             //Semáforos de exclusión mutua
             semRG = new Semaphore(1);
             semMG = new Semaphore(1);
@@ -220,7 +203,6 @@ public final class Fabrica {
     public static void contratar(int num){
         switch (num) {
             case 1:
-                //No comienza con los otros hilos, tiene retraso. Acomodar para que inicien al mismo tiempo
                 if (productoresRuedasActuales != prodRuedas.length) {
                     prodRuedas[productoresRuedasActuales] = new Productor(semR, "r"," una rueda", 
                             semER, diasDeProduccionRueda, duracionDelDia, semRG, almacenRuedas,1);
@@ -283,11 +265,7 @@ public final class Fabrica {
             case 4:
                 if(ensambladoresActuales > 0){
                     ensambladoresActuales--;
-                    /*while(ensambladoresA[ensambladoresActuales].contratado){
-                        if (!ensambladoresA[ensambladoresActuales].produje){ */
-                            ensambladoresA[ensambladoresActuales].setContratado(false);
-                       /* }
-                    }*/
+                    ensambladoresA[ensambladoresActuales].setContratado(false);
                 }
                 break;    
             default:
@@ -406,16 +384,16 @@ public final class Fabrica {
             ensambladoresIniciales = Integer.parseInt(arrayAux[1]);
             ensambladoresActuales = Integer.parseInt(arrayAux[1]);
 
-            if ((productoresParabrisasIniciales > prodParabrisas.length) || productoresParabrisasIniciales <= 0) {
+            if ((productoresParabrisasIniciales > prodParabrisas.length) || productoresParabrisasIniciales < 0) {
                 JOptionPane.showMessageDialog(null, "Inconsistencia de datos en los productores de parabrisas");
                 System.exit(0);
-            }else if((productoresMotoresIniciales > prodMotores.length) || productoresMotoresIniciales <= 0){
+            }else if((productoresMotoresIniciales > prodMotores.length) || productoresMotoresIniciales < 0){
                 JOptionPane.showMessageDialog(null, "Inconsistencia de datos en los productores de motores");
                 System.exit(0);
-            }else if((productoresRuedasIniciales > prodRuedas.length) || productoresRuedasIniciales <= 0){
+            }else if((productoresRuedasIniciales > prodRuedas.length) || productoresRuedasIniciales < 0){
                 JOptionPane.showMessageDialog(null, "Inconsistencia de datos en los productores de ruedas");
                 System.exit(0);
-            }else if((ensambladoresIniciales > ensambladoresA.length) || ensambladoresIniciales <= 0){
+            }else if((ensambladoresIniciales > ensambladoresA.length) || ensambladoresIniciales < 0){
                 JOptionPane.showMessageDialog(null, "Inconsistencia de datos en los ensambladores");
                 System.exit(0);
             }else if(duracionDelDia <=0 || diasParaDespachoEstatico <= 0){

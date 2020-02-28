@@ -10,4 +10,4 @@ Cantidad máxima de ensambladores:3
 Cantidad inicial de productores de ruedas:5
 Cantidad inicial de productores de parabrisas:1
 Cantidad inicial de productores de motores:1
-Cantidad inicial de ensambladores:3
+Cantidad inicial de ensambladores:0
