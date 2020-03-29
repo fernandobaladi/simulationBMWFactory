@@ -1,0 +1,13 @@
+﻿Duración del día (en segundos):1
+Cantidad de días entre despachos:1000
+Capacidad máxima del almacen de ruedas:30
+Capacidad máxima del almacen de parabrisa:25
+Capacidad máxima del almacen de motores:15
+Cantidad máxima de productores de ruedas:5
+Cantidad máxima de productores de parabrisas:5
+Cantidad máxima de productores de motores:3
+Cantidad máxima de ensambladores:3
+Cantidad inicial de productores de ruedas:5
+Cantidad inicial de productores de parabrisas:1
+Cantidad inicial de productores de motores:1
+Cantidad inicial de ensambladores:0

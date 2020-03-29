@@ -5,6 +5,12 @@
  */
 package proyectooperativosbmwbaladiinvernon;
 
+import static java.lang.Thread.sleep;
+import java.util.concurrent.Semaphore;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+
 /**
  *
  * @author Fernando Baladi
@@ -14,14 +20,12 @@ public class ProyectoOperativosBMWBaladiInvernon {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         
-        ProductorDeRuedas rr[] = new ProductorDeRuedas[5];
-        rr[0] = new ProductorDeRuedas();
-        System.out.println("Aquí empieza");
-        rr[1].start();
-        System.out.println("Aquí termina");
-        
+       
+        Fabrica fabrica = new Fabrica();
+        fabrica.verificador();
+    
     }
     
 }
