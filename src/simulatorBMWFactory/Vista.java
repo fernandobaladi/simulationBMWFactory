@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package proyectooperativosbmwbaladiinvernon;
+package simulatorBMWFactory;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -86,8 +86,8 @@ public class Vista extends javax.swing.JFrame {
         WheelMakerjTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(650, 700));
-        setPreferredSize(new java.awt.Dimension(650, 700));
+        setMaximumSize(new java.awt.Dimension(620, 720));
+        setPreferredSize(new java.awt.Dimension(620, 720));
         setResizable(false);
 
         AppjPanel.setBackground(new java.awt.Color(160, 246, 210));
@@ -473,7 +473,7 @@ public class Vista extends javax.swing.JFrame {
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(RemainingDaysjTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
